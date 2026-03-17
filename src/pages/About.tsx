@@ -1,12 +1,57 @@
-import { SectionHeading, Card } from "@/components/ui/Card";
+import { Card } from "@/components/ui/Card";
 import { CTABanner } from "@/components/ui/CTABanner";
+import { FounderImage } from "@/components/FounderImage";
 import { motion } from "motion/react";
 import { Target, Shield, Zap, Users } from "lucide-react";
+
+const journey = [
+  {
+    era: "2017–2023",
+    badge: "IDF · Intelligence Unit",
+    title: "Unit 8200",
+    tagline: "Built systems that had to be reliable, precise, and impossible to fool.",
+    stat: { value: "Unit 8200", label: "· most cited tech talent pipeline in the world" },
+    accentColor: "text-slate-700",
+    dotBorder: "border-slate-500",
+    badgeBg: "bg-slate-100 text-slate-700",
+  },
+  {
+    era: "2023–2025",
+    badge: "E-commerce · Marketplace",
+    title: "Growth Lead",
+    tagline: "Drove AI and product decisions for tens of millions of daily active users.",
+    stat: { value: "10M+", label: "monthly active users" },
+    accentColor: "text-blue-600",
+    dotBorder: "border-blue-400",
+    badgeBg: "bg-blue-50 text-blue-700",
+  },
+  {
+    era: "2025–2026",
+    badge: "Fintech · AI",
+    title: "AI & Automation Lead",
+    tagline: "Deployed AI across core product flows. Measured in millions of dollars.",
+    stat: { value: "$5M+", label: "revenue generated through AI optimization" },
+    accentColor: "text-emerald-600",
+    dotBorder: "border-emerald-400",
+    badgeBg: "bg-emerald-50 text-emerald-700",
+  },
+  {
+    era: "2026",
+    badge: "AI Agency",
+    title: "Elevate Digital",
+    tagline: "Bringing the enterprise playbook to SMBs at a fraction of the cost.",
+    stat: { value: "30 days", label: "avg. time to first measurable ROI" },
+    accentColor: "text-blue-600",
+    dotBorder: "border-blue-400",
+    badgeBg: "bg-blue-50 text-blue-700",
+  },
+];
 
 export default function About() {
   return (
     <div className="flex flex-col min-h-screen">
-      <section className="pt-32 pb-20 relative overflow-hidden">
+      {/* Hero */}
+      <section className="pb-16 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-accent/10 via-transparent to-transparent opacity-50 mix-blend-overlay pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <motion.div
@@ -14,9 +59,6 @@ export default function About() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel text-accent font-medium text-xs tracking-widest uppercase mb-8">
-              Our Mission
-            </div>
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif text-text-heading mb-8 leading-[1.1] tracking-tight text-balance max-w-4xl mx-auto">
               <span className="italic text-accent">Time Wealth</span> for SMBs.
             </h1>
@@ -27,89 +69,136 @@ export default function About() {
         </div>
       </section>
 
-      <section className="py-24 relative z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+      {/* Founder Row — photo left + compact timeline right */}
+      <section className="pt-8 pb-16 relative z-10">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+            {/* Left — Photo + identity */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.7 }}
+              className="flex flex-col items-center"
             >
-              <h2 className="text-3xl md:text-4xl font-serif text-text-heading mb-8">The Nexus AI Story</h2>
-              <div className="space-y-6 text-lg text-text-body leading-relaxed">
-                <p>
-                  Nexus AI was founded on a simple observation: enterprise companies were using AI to become hyper-efficient, while local SMBs were still drowning in manual tasks and missed calls.
-                </p>
-                <p>
-                  We saw business owners working 80-hour weeks, acting as their own receptionists, data entry clerks, and marketers. We knew there was a better way.
-                </p>
-                <p>
-                  Today, we act as the fractional Chief AI Officer for businesses across the US. We don't just sell software; we architect custom automation engines that run silently in the background, capturing leads, booking appointments, and saving thousands of hours.
-                </p>
+              <FounderImage size="lg" className="mb-6" />
+              <h2 className="text-2xl font-serif text-text-heading mb-1">Tal Shani</h2>
+              <p className="text-sm text-accent font-semibold uppercase tracking-widest mb-5">
+                Founder & CEO, Elevate Digital
+              </p>
+              <div className="flex flex-wrap gap-2">
+                <span className="bg-slate-100 text-slate-600 text-xs font-medium px-3 py-1.5 rounded-full">
+                  IDF Unit 8200
+                </span>
+                <span className="bg-slate-100 text-slate-600 text-xs font-medium px-3 py-1.5 rounded-full">
+                  10M+ users
+                </span>
+                <span className="bg-emerald-50 text-emerald-700 text-xs font-medium px-3 py-1.5 rounded-full">
+                  $5M+ generated
+                </span>
               </div>
             </motion.div>
-            <motion.div 
-              className="grid grid-cols-1 sm:grid-cols-2 gap-6"
+
+            {/* Right — Compact timeline */}
+            <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.7 }}
+              transition={{ duration: 0.7, delay: 0.1 }}
             >
-              {[
-                { icon: Target, title: "Results First", desc: "We only build what drives ROI." },
-                { icon: Shield, title: "Radical Transparency", desc: "No hidden fees, no jargon." },
-                { icon: Zap, title: "Speed to Value", desc: "Live in weeks, not months." },
-                { icon: Users, title: "True Partners", desc: "We succeed when you scale." },
-              ].map((val, i) => {
-                const Icon = val.icon;
-                return (
-                  <Card key={i} className="p-8 glass-panel group hover:bg-white/5 transition-all duration-500">
-                    <div className="h-12 w-12 rounded-full glass-panel text-accent flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 border-accent/20">
-                      <Icon className="h-5 w-5" strokeWidth={1.5} />
+              <p className="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-6">
+                Background
+              </p>
+              <div className="relative pl-4">
+                {/* Vertical line */}
+                <div className="absolute left-[6px] top-0 bottom-0 w-px bg-slate-200" />
+
+                {journey.map((item, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-40px" }}
+                    transition={{ duration: 0.5, delay: 0.1 + i * 0.08 }}
+                    className="relative pl-6 mb-7 last:mb-0"
+                  >
+                    {/* Dot */}
+                    <div
+                      className={`absolute left-0 top-1.5 h-3 w-3 rounded-full bg-white border-2 ${item.dotBorder} shadow-sm`}
+                    />
+                    {/* Era + badge */}
+                    <div className="flex flex-wrap items-center gap-1.5 mb-0.5">
+                      <span className="text-[11px] font-mono text-slate-400">{item.era}</span>
+                      <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${item.badgeBg}`}>
+                        {item.badge}
+                      </span>
                     </div>
-                    <h3 className="text-lg font-serif text-text-heading mb-3">{val.title}</h3>
-                    <p className="text-sm text-text-body leading-relaxed">{val.desc}</p>
-                  </Card>
-                );
-              })}
+                    {/* Title */}
+                    <p className="text-sm font-bold text-slate-900 mb-0.5">{item.title}</p>
+                    {/* Tagline */}
+                    <p className="text-xs text-slate-500 leading-relaxed mb-1.5">{item.tagline}</p>
+                    {/* Stat */}
+                    <span className={`text-xs font-extrabold ${item.accentColor}`}>{item.stat.value}</span>
+                    <span className="text-xs text-slate-400 ml-1.5">{item.stat.label}</span>
+                  </motion.div>
+                ))}
+              </div>
             </motion.div>
           </div>
         </div>
       </section>
 
-      <section className="py-32 relative overflow-hidden">
-        <div className="absolute inset-0 bg-accent/5 mix-blend-overlay" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <SectionHeading 
-            label="Leadership"
-            title="Meet the Strategists" 
-            subtitle="A team of AI engineers, automation experts, and business growth strategists."
-            centered
-          />
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-20">
-            {[
-              { name: "Alex Mercer", role: "Founder & Lead Strategist", bg: "bg-white/5" },
-              { name: "Sarah Chen", role: "Head of AI Engineering", bg: "bg-white/10" },
-              { name: "Marcus Johnson", role: "Client Success Director", bg: "bg-white/5" },
-            ].map((member, i) => (
-              <motion.div 
-                key={i} 
-                className="text-center group"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-              >
-                <div className={`w-48 h-48 mx-auto rounded-full ${member.bg} mb-8 shadow-inner border border-white/10 group-hover:border-accent/30 transition-colors duration-500 relative overflow-hidden`}>
-                  <div className="absolute inset-0 bg-gradient-to-tr from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                </div>
-                <h3 className="text-2xl font-serif text-text-heading mb-2">{member.name}</h3>
-                <p className="text-accent font-sans text-sm tracking-widest uppercase">{member.role}</p>
-              </motion.div>
-            ))}
-          </div>
+      {/* About Elevate Digital + Values */}
+      <section className="py-20 relative z-10 bg-slate-50 border-y border-slate-200">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="text-2xl font-bold text-slate-900 mb-8">About Elevate Digital</h2>
+            <div className="space-y-5 text-lg text-text-body leading-relaxed max-w-3xl">
+              <p>
+                I started Elevate Digital because I saw a massive gap: enterprise companies were leveraging AI to become hyper-efficient, while the small businesses that power local communities were still drowning in missed calls, manual data entry, and 80-hour weeks.
+              </p>
+              <p>
+                I knew there had to be a better way. Today, Elevate Digital acts as your fractional Chief AI Officer. We don't just sell software — we architect custom automation engines that run silently in the background, capturing leads, booking appointments, and saving you thousands of hours.
+              </p>
+              <p>
+                Every solution we build is designed with one goal: giving you back the time and freedom you started your business for in the first place.
+              </p>
+            </div>
+            <blockquote className="mt-10 border-l-2 border-blue-500 pl-6 max-w-3xl">
+              <p className="text-lg italic text-slate-700 leading-relaxed">
+                "Every system I built for enterprise — the lead scoring, the automation workflows, the conversion funnels — I've rebuilt for SMBs at a fraction of the cost. You shouldn't need a $10M engineering budget to have tools that work this well."
+              </p>
+              <footer className="mt-3 text-sm font-semibold text-slate-500 uppercase tracking-wide">
+                — Tal Shani, Founder
+              </footer>
+            </blockquote>
+
+            {/* Core Values — directly below the quote */}
+            <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+              {[
+                { icon: Target, title: "Results First", desc: "We only build what drives ROI. No vanity projects." },
+                { icon: Shield, title: "Radical Transparency", desc: "No hidden fees, no jargon, no surprises." },
+                { icon: Zap, title: "Speed to Value", desc: "Live in weeks, not months. Fast results matter." },
+                { icon: Users, title: "True Partners", desc: "We succeed when you scale. Your growth is our growth." },
+              ].map((val, i) => {
+                const Icon = val.icon;
+                return (
+                  <Card key={i} className="p-6 glass-panel group hover:bg-white/5 transition-all duration-500">
+                    <div className="h-10 w-10 rounded-full glass-panel text-accent flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-500 border-accent/20">
+                      <Icon className="h-4 w-4" strokeWidth={1.5} />
+                    </div>
+                    <h3 className="text-base font-serif text-text-heading mb-2">{val.title}</h3>
+                    <p className="text-sm text-text-body leading-relaxed">{val.desc}</p>
+                  </Card>
+                );
+              })}
+            </div>
+          </motion.div>
         </div>
       </section>
 

@@ -13,7 +13,7 @@ export function Layout() {
     
     const path = pathname === "/" ? "Home" : pathname.split("/")[1].replace("-", " ");
     const title = path.charAt(0).toUpperCase() + path.slice(1);
-    document.title = `${title} | Nexus AI Automation Agency`;
+    document.title = `${title} | Elevate Digital`;
   }, [pathname]);
 
   useEffect(() => {
@@ -64,7 +64,7 @@ export function LeadMagnetLayout() {
     
     const path = pathname.split("/")[1].replace(/-/g, " ");
     const title = path.charAt(0).toUpperCase() + path.slice(1);
-    document.title = `${title} | Nexus AI Automation Agency`;
+    document.title = `${title} | Elevate Digital`;
   }, [pathname]);
 
   return (

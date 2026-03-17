@@ -18,7 +18,7 @@ export default function ServiceDetail() {
   const service = services.find((s) => s.slug === slug);
 
   if (!service) {
-    return <Navigate to="/services" replace />;
+    return <Navigate to="/" replace />;
   }
 
   const Icon = iconMap[service.icon as keyof typeof iconMap];
@@ -26,7 +26,7 @@ export default function ServiceDetail() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero */}
-      <section className="pt-32 pb-20 relative overflow-hidden">
+      <section className="pb-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-accent/10 via-transparent to-transparent opacity-50 mix-blend-overlay pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
@@ -35,9 +35,6 @@ export default function ServiceDetail() {
             transition={{ duration: 0.7, ease: "easeOut" }}
             className="max-w-4xl"
           >
-            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full glass-panel text-accent font-medium text-xs tracking-widest uppercase mb-8 border-accent/20">
-              <Icon className="h-4 w-4" strokeWidth={1.5} /> {service.title}
-            </div>
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif text-text-heading mb-8 leading-[1.1] tracking-tight text-balance">
               {service.shortDescription}
             </h1>
@@ -78,7 +75,7 @@ export default function ServiceDetail() {
                     <div>
                       <h3 className="text-xl font-serif text-text-heading mb-3">{benefit}</h3>
                       <p className="text-text-body leading-relaxed">
-                        Stop letting inefficiencies drain your resources. Our solution ensures consistent, high-quality execution every single time.
+                        {service.benefitDetails?.[i] || benefit}
                       </p>
                     </div>
                   </div>

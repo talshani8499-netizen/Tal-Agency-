@@ -8,9 +8,9 @@ export function ContactForm() {
     e.preventDefault();
     setStatus("submitting");
     
-    // Simulate API call
+    // TODO: Connect to a real form service (Formspree, Netlify Forms, etc.)
+    const formData = new FormData(e.currentTarget);
     setTimeout(() => {
-      console.log("Form submitted:", Object.fromEntries(new FormData(e.currentTarget)));
       setStatus("success");
     }, 1000);
   };

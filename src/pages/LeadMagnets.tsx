@@ -15,9 +15,6 @@ export function EbookLanding() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel text-accent font-medium text-xs tracking-widest uppercase mb-8">
-              <FileText className="h-4 w-4" /> Free E-Book
-            </div>
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif text-text-heading tracking-tight mb-6 leading-[1.1]">
               The SMB Owner's Blueprint to <br className="hidden md:block" />
               <span className="italic text-accent">AI Automation</span>
@@ -105,9 +102,6 @@ export function AuditLanding() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel text-accent font-medium text-xs tracking-widest uppercase mb-8">
-            <Target className="h-4 w-4" /> Free Assessment
-          </div>
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif text-text-heading tracking-tight mb-6 leading-[1.1]">
             Unlock Your Business's <br className="hidden md:block" />
             <span className="italic text-accent">AI Potential</span>

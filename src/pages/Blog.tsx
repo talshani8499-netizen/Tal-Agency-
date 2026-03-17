@@ -8,7 +8,7 @@ import { Calendar, Clock, ArrowRight } from "lucide-react";
 export default function Blog() {
   return (
     <div className="flex flex-col min-h-screen">
-      <section className="pt-32 pb-16 relative overflow-hidden">
+      <section className="pb-16 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-accent/10 via-transparent to-transparent opacity-50 mix-blend-overlay pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <motion.div
@@ -16,9 +16,6 @@ export default function Blog() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel text-accent font-medium text-xs tracking-widest uppercase mb-8">
-              Our Journal
-            </div>
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif text-text-heading tracking-tight mb-6 leading-[1.1]">
               Insights for <span className="italic text-accent">Automated Growth</span>
             </h1>

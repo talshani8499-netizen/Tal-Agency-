@@ -12,6 +12,12 @@ export const services = [
       "Direct calendar integration",
       "Instant lead qualification"
     ],
+    benefitDetails: [
+      "Your AI agent picks up every call — nights, weekends, holidays. No more voicemails that go unanswered while leads call your competitors.",
+      "Natural voice interactions trained on your business knowledge. Callers won't know they're speaking with AI, and they'll get accurate answers every time.",
+      "Appointments are booked directly into your Google Calendar, Calendly, or scheduling tool. No double-bookings, no back-and-forth.",
+      "Each caller is scored and categorized before your team ever picks up the phone. Only qualified, high-intent leads reach your inbox."
+    ],
     useCases: ["Home Services", "Real Estate", "Healthcare Clinics", "Law Firms"],
     process: [
       { step: 1, title: "Discovery & Scripting", description: "We map out your ideal call flow and train the AI on your business knowledge." },
@@ -31,6 +37,12 @@ export const services = [
       "Multi-language support",
       "Seamless CRM handoff",
       "Trained on your specific FAQs"
+    ],
+    benefitDetails: [
+      "Respond to every website visitor within seconds — not minutes or hours. Studies show leads contacted within 5 minutes are 21x more likely to convert.",
+      "Serve customers in their preferred language automatically. Expand your reach without hiring multilingual staff.",
+      "Qualified leads are pushed directly into your CRM with full conversation context. Your sales team picks up where the AI left off, fully informed.",
+      "Your chat agent knows your pricing, services, hours, and policies inside-out. No generic bot responses — just accurate, helpful answers."
     ],
     useCases: ["E-commerce", "SaaS", "B2B Services", "Education"],
     process: [
@@ -52,6 +64,12 @@ export const services = [
       "Lightning-fast load times",
       "Integrated lead capture forms"
     ],
+    benefitDetails: [
+      "AI continuously tests headlines, CTAs, and layouts — finding the winning combination without you lifting a finger.",
+      "Ad copy matches landing page copy automatically. When someone clicks an ad for 'emergency plumbing,' the page speaks directly to that need.",
+      "Pages load in under 2 seconds on any device. Slow pages kill conversions — ours don't.",
+      "Smart forms that adapt based on visitor behavior. Fewer fields for cold traffic, deeper qualification for warm leads."
+    ],
     useCases: ["Paid Ad Campaigns", "Lead Magnet Funnels", "Event Registrations", "Product Launches"],
     process: [
       { step: 1, title: "Audience Analysis", description: "We analyze your target demographic and the specific intent behind their clicks." },
@@ -71,6 +89,12 @@ export const services = [
       "Save 10+ hours per week per employee",
       "Connect legacy systems",
       "Trigger actions across multiple apps"
+    ],
+    benefitDetails: [
+      "Automated workflows don't mistype numbers, forget steps, or skip entries. Your data is consistent and accurate, every single time.",
+      "Free your team from copy-paste busywork. Those 10+ hours go back into selling, building relationships, and growing revenue.",
+      "Even if your tools are outdated, we build custom bridges using APIs, webhooks, and middleware to make everything talk to each other.",
+      "One event can cascade across your entire stack — a new lead triggers a CRM entry, welcome email, Slack notification, and task assignment simultaneously."
     ],
     useCases: ["Invoice Processing", "Employee Onboarding", "Inventory Syncing", "Complex Data Entry"],
     process: [

@@ -15,13 +15,10 @@ export default function CaseStudyDetail() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Header */}
-      <section className={`pt-40 pb-32 ${study.image} relative overflow-hidden`}>
+      <section className={`pt-4 pb-32 ${study.image} relative overflow-hidden`}>
         <div className="absolute inset-0 bg-background/80 mix-blend-multiply" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-          <div className="inline-block px-4 py-1.5 glass-panel text-accent text-xs font-bold uppercase tracking-widest rounded-full mb-8 border-accent/20">
-            {study.industry} Case Study
-          </div>
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif text-text-heading tracking-tight mb-8 text-balance">
             {study.client}
           </h1>
@@ -35,19 +32,31 @@ export default function CaseStudyDetail() {
       <section className="py-24 relative z-10">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Metrics Bar */}
-          <div className="glass-panel p-10 -mt-40 relative z-20 mb-20 flex flex-col md:flex-row items-center justify-between gap-8 border-accent/20 shadow-[0_0_40px_rgba(212,168,83,0.05)]">
-            <div className="flex items-center gap-6">
-              <div className="h-16 w-16 rounded-full glass-panel text-accent flex items-center justify-center shrink-0 border-accent/20">
-                <TrendingUp className="h-8 w-8" strokeWidth={1.5} />
+          <div className="glass-panel p-10 -mt-40 relative z-20 mb-20 flex flex-col gap-6 border-accent/20 shadow-[0_0_40px_rgba(212,168,83,0.05)]">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+              <div className="flex items-center gap-6">
+                <div className="h-16 w-16 rounded-full glass-panel text-accent flex items-center justify-center shrink-0 border-accent/20">
+                  <TrendingUp className="h-8 w-8" strokeWidth={1.5} />
+                </div>
+                <div>
+                  <p className="text-xs text-text-muted font-sans font-semibold uppercase tracking-widest mb-1">Key Result</p>
+                  <p className="text-4xl font-serif text-accent">{study.keyMetric}</p>
+                </div>
               </div>
-              <div>
-                <p className="text-xs text-text-muted font-sans font-semibold uppercase tracking-widest mb-1">Key Result</p>
-                <p className="text-4xl font-serif text-accent">{study.keyMetric}</p>
+              <Button href="/contact" size="lg" className="w-full md:w-auto">
+                Get Similar Results
+              </Button>
+            </div>
+            <div className="border-t border-accent/10 pt-5">
+              <p className="text-xs text-text-muted font-sans font-semibold uppercase tracking-widest mb-3">Stack Used</p>
+              <div className="flex flex-wrap gap-2">
+                {study.bundle.map((item) => (
+                  <span key={item} className="text-xs font-medium bg-background border border-accent/20 text-text-body px-3 py-1 rounded-full">
+                    {item}
+                  </span>
+                ))}
               </div>
             </div>
-            <Button href="/contact" size="lg" className="w-full md:w-auto">
-              Get Similar Results
-            </Button>
           </div>
 
           <div className="prose prose-lg prose-invert max-w-none prose-headings:font-serif prose-headings:text-text-heading prose-p:text-text-body prose-p:leading-relaxed">
@@ -76,24 +85,14 @@ export default function CaseStudyDetail() {
 
             <h2 className="text-3xl md:text-4xl font-serif text-text-heading mb-8">Key Takeaways</h2>
             <ul className="space-y-6 mb-16 list-none pl-0">
-              <li className="flex items-start gap-4">
-                <div className="h-8 w-8 rounded-full glass-panel text-accent flex items-center justify-center shrink-0 mt-1 border-accent/20">
-                  <Check className="h-4 w-4" strokeWidth={1.5} />
-                </div>
-                <span className="text-lg text-text-body leading-relaxed">Automation directly impacts the bottom line by capturing lost revenue.</span>
-              </li>
-              <li className="flex items-start gap-4">
-                <div className="h-8 w-8 rounded-full glass-panel text-accent flex items-center justify-center shrink-0 mt-1 border-accent/20">
-                  <Check className="h-4 w-4" strokeWidth={1.5} />
-                </div>
-                <span className="text-lg text-text-body leading-relaxed">AI systems scale infinitely without adding HR overhead or management complexity.</span>
-              </li>
-              <li className="flex items-start gap-4">
-                <div className="h-8 w-8 rounded-full glass-panel text-accent flex items-center justify-center shrink-0 mt-1 border-accent/20">
-                  <Check className="h-4 w-4" strokeWidth={1.5} />
-                </div>
-                <span className="text-lg text-text-body leading-relaxed">Implementation is fast, with ROI typically realized in the first 30 days.</span>
-              </li>
+              {study.takeaways.map((takeaway) => (
+                <li key={takeaway} className="flex items-start gap-4">
+                  <div className="h-8 w-8 rounded-full glass-panel text-accent flex items-center justify-center shrink-0 mt-1 border-accent/20">
+                    <Check className="h-4 w-4" strokeWidth={1.5} />
+                  </div>
+                  <span className="text-lg text-text-body leading-relaxed">{takeaway}</span>
+                </li>
+              ))}
             </ul>
           </div>
         </div>

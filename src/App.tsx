@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Layout, LeadMagnetLayout } from "./components/Layout";
 import Home from "./pages/Home";
 import Services from "./pages/Services";
+import VoiceAgents from "./pages/VoiceAgents";
 import ServiceDetail from "./pages/ServiceDetail";
 import Pricing from "./pages/Pricing";
 import CaseStudies from "./pages/CaseStudies";
@@ -11,6 +12,9 @@ import Contact from "./pages/Contact";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import { EbookLanding, AuditLanding, VoiceDemoLanding } from "./pages/LeadMagnets";
+import ChatAgents from "./pages/ChatAgents";
+import LandingPages from "./pages/LandingPages";
+import CustomAutomation from "./pages/CustomAutomation";
 
 function NotFound() {
   return (
@@ -32,6 +36,10 @@ export default function App() {
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
           <Route path="/services" element={<Services />} />
+          <Route path="/services/voice-agents" element={<VoiceAgents />} />
+          <Route path="/services/chat-agents" element={<ChatAgents />} />
+          <Route path="/services/landing-pages" element={<LandingPages />} />
+          <Route path="/services/custom-automation" element={<CustomAutomation />} />
           <Route path="/services/:slug" element={<ServiceDetail />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/case-studies" element={<CaseStudies />} />

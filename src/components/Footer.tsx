@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Zap, Twitter, Linkedin, Github } from "lucide-react";
+import { TrendingUp, Twitter, Linkedin } from "lucide-react";
 import { services } from "@/data/services";
 
 export function Footer() {
@@ -11,24 +11,21 @@ export function Footer() {
           <div className="col-span-1 md:col-span-1">
             <Link to="/" className="flex items-center gap-2 mb-6">
               <div className="bg-blue-600 p-1.5 rounded-lg">
-                <Zap className="h-5 w-5 text-white" />
+                <TrendingUp className="h-5 w-5 text-white" />
               </div>
               <span className="font-bold text-xl tracking-tight text-white">
-                Nexus<span className="text-blue-500">AI</span>
+                Elevate<span className="text-blue-400">Digital</span>
               </span>
             </Link>
             <p className="text-sm text-slate-400 mb-6 max-w-xs">
-              Empowering US SMBs with intelligent automation to reclaim time, reduce costs, and accelerate growth.
+              Helping US small businesses capture more leads, save time, and grow revenue with intelligent AI automation.
             </p>
             <div className="flex gap-4">
-              <a href="#" className="text-slate-400 hover:text-white transition-colors">
-                <Twitter className="h-5 w-5" />
+              <a href="#" className="text-slate-400 hover:text-white transition-colors" aria-label="Twitter" rel="noopener noreferrer">
+                <Twitter className="h-5 w-5" aria-hidden="true" />
               </a>
-              <a href="#" className="text-slate-400 hover:text-white transition-colors">
-                <Linkedin className="h-5 w-5" />
-              </a>
-              <a href="#" className="text-slate-400 hover:text-white transition-colors">
-                <Github className="h-5 w-5" />
+              <a href="#" className="text-slate-400 hover:text-white transition-colors" aria-label="LinkedIn" rel="noopener noreferrer">
+                <Linkedin className="h-5 w-5" aria-hidden="true" />
               </a>
             </div>
           </div>
@@ -70,8 +67,8 @@ export function Footer() {
         </div>
 
         <div className="pt-8 border-t border-slate-800 text-sm text-slate-500 flex flex-col md:flex-row justify-between items-center">
-          <p>&copy; {new Date().getFullYear()} Nexus AI Automation Agency. All rights reserved.</p>
-          <p className="mt-2 md:mt-0">Built for US SMBs.</p>
+          <p>&copy; {new Date().getFullYear()} Elevate Digital. All rights reserved.</p>
+          <p className="mt-2 md:mt-0">AI Automation for US Small Businesses.</p>
         </div>
       </div>
     </footer>

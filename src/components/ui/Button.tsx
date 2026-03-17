@@ -24,12 +24,12 @@ export function Button({
   children,
   ...props
 }: ButtonProps) {
-  const baseStyles = "inline-flex items-center justify-center rounded-xl font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent disabled:opacity-50 disabled:pointer-events-none relative overflow-hidden group";
+  const baseStyles = "inline-flex items-center justify-center rounded-lg font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none group";
   
   const variants = {
-    primary: "bg-accent text-bg-base hover:bg-accent-hover shadow-[0_0_20px_rgba(212,168,83,0.2)] hover:shadow-[0_0_25px_rgba(212,168,83,0.4)]",
-    secondary: "glass-panel text-accent hover:bg-accent hover:text-bg-base hover:border-accent",
-    ghost: "bg-transparent text-text-heading hover:text-accent",
+    primary: "bg-blue-600 text-white hover:bg-blue-700 shadow-sm",
+    secondary: "bg-white text-blue-600 border border-blue-200 hover:bg-blue-50 hover:border-blue-300",
+    ghost: "bg-transparent text-slate-700 hover:text-blue-600 hover:bg-blue-50",
   };
 
   const sizes = {
@@ -50,6 +50,13 @@ export function Button({
   );
 
   if (href) {
+    if (href.startsWith("http")) {
+      return (
+        <a href={href} target="_blank" rel="noopener noreferrer" className={classes}>
+          {content}
+        </a>
+      );
+    }
     return (
       <Link to={href} className={classes}>
         {content}

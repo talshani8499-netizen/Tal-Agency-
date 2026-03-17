@@ -1,36 +1,48 @@
 import { Button } from "./Button";
-import { Link } from "react-router-dom";
 import { motion } from "motion/react";
+import { CheckCircle2 } from "lucide-react";
 
 export function CTABanner() {
   return (
-    <section className="py-32 relative overflow-hidden">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <motion.div 
+    <section className="py-24 bg-slate-50 relative overflow-hidden border-t border-slate-200">
+      {/* Background decoration (removed glows — not needed on light bg) */}
+      <div className="absolute inset-0 pointer-events-none" />
+      <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.7 }}
-          className="glass-panel p-12 md:p-20 text-center relative overflow-hidden group"
+          transition={{ duration: 0.6 }}
         >
-          {/* Abstract background glow */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-accent/10 rounded-full blur-[80px] group-hover:bg-accent/15 transition-colors duration-700 pointer-events-none" />
-          
-          <div className="relative z-10">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif text-text-heading mb-6 tracking-tight text-balance">
-              Ready to Find Your <span className="italic text-accent">Perfect Fit?</span>
-            </h2>
-            <p className="text-xl text-text-body mb-12 max-w-2xl mx-auto leading-relaxed">
-              Stop letting inefficiencies drain your profits. Let's build a custom AI strategy that buys back your time.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-              <Button href="/contact" size="lg" icon>
-                Schedule Strategy Call
-              </Button>
-              <Button href="/guide-to-ai-automation" variant="secondary" size="lg">
-                Get the Free AI Guide
-              </Button>
-            </div>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-4 leading-tight">
+            Your business has a next level.<br />
+            <span className="text-blue-600">We'll show you exactly how to reach it.</span>
+          </h2>
+          <p className="text-xl text-slate-400 mb-8 max-w-2xl mx-auto leading-relaxed">
+            Most business owners are running at a fraction of their potential — handling calls, admin, and follow-ups manually while their AI-powered competitors scale effortlessly. One free call is all it takes to see where you stand.
+          </p>
+
+          {/* Trust bullets */}
+          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 mb-10">
+            {[
+              "Free 30-min strategy call",
+              "No commitment, no pressure",
+              "Real ROI numbers before you spend a dollar",
+            ].map((item) => (
+              <span key={item} className="flex items-center gap-2 text-sm text-slate-600 font-medium">
+                <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0" />
+                {item}
+              </span>
+            ))}
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Button href="https://cal.com/tal-shani-i0wamv/elevate-digital" size="lg" icon>
+              Book a Strategy Call
+            </Button>
+            <Button href="/free-ai-audit" variant="secondary" size="lg">
+              Get Free AI Analysis
+            </Button>
           </div>
         </motion.div>
       </div>

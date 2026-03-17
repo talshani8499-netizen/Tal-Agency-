@@ -1,12 +1,12 @@
 import { SectionHeading } from "@/components/ui/Card";
 import { ContactForm } from "@/components/ContactForm";
-import { Mail, Phone, MapPin, Clock } from "lucide-react";
+import { Mail, Phone, Clock } from "lucide-react";
 import { motion } from "motion/react";
 
 export default function Contact() {
   return (
     <div className="flex flex-col min-h-screen">
-      <section className="pt-32 pb-24 relative overflow-hidden">
+      <section className="pb-24 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-accent/10 via-transparent to-transparent opacity-50 mix-blend-overlay pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-16">
@@ -15,21 +15,18 @@ export default function Contact() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel text-accent font-medium text-xs tracking-widest uppercase mb-8">
-                Contact Us
-              </div>
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif text-text-heading tracking-tight mb-6 leading-[1.1]">
                 Let's Talk <span className="italic text-accent">Automation.</span>
               </h1>
               <p className="text-xl text-text-body leading-relaxed">
-                Reach out to our AI experts to discuss your business needs and discover how intelligent automation can transform your operations.
+                Reach out to discuss your business needs and discover how intelligent automation can transform your operations.
               </p>
             </motion.div>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 max-w-6xl mx-auto">
             {/* Contact Info */}
-            <motion.div 
+            <motion.div
               className="lg:col-span-1 space-y-8"
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
@@ -37,7 +34,7 @@ export default function Contact() {
             >
               <div className="glass-panel p-8 rounded-3xl">
                 <h3 className="text-2xl font-serif text-text-heading mb-8">Get in Touch</h3>
-                
+
                 <div className="space-y-8">
                   <div className="flex items-start gap-5 group">
                     <div className="h-12 w-12 rounded-full glass-panel text-accent flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-500 border-accent/20">
@@ -45,20 +42,20 @@ export default function Contact() {
                     </div>
                     <div>
                       <p className="text-sm font-medium text-text-muted mb-1 uppercase tracking-wider">Call Us</p>
-                      <p className="text-lg font-medium text-text-heading">+1 (800) 555-0199</p>
+                      <p className="text-lg font-medium text-text-heading">Coming Soon</p>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-start gap-5 group">
                     <div className="h-12 w-12 rounded-full glass-panel text-accent flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-500 border-accent/20">
                       <Mail className="h-5 w-5" strokeWidth={1.5} />
                     </div>
                     <div>
                       <p className="text-sm font-medium text-text-muted mb-1 uppercase tracking-wider">Email Us</p>
-                      <p className="text-lg font-medium text-text-heading">hello@nexusai.agency</p>
+                      <p className="text-lg font-medium text-text-heading">hello@elevatedigital.agency</p>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-start gap-5 group">
                     <div className="h-12 w-12 rounded-full glass-panel text-accent flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-500 border-accent/20">
                       <Clock className="h-5 w-5" strokeWidth={1.5} />
@@ -86,7 +83,7 @@ export default function Contact() {
             </motion.div>
 
             {/* Contact Form */}
-            <motion.div 
+            <motion.div
               className="lg:col-span-2"
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
