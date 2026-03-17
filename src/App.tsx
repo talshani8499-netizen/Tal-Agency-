@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Analytics } from "@vercel/analytics/react";
 import { Layout, LeadMagnetLayout } from "./components/Layout";
 import Home from "./pages/Home";
 import Services from "./pages/Services";
@@ -58,6 +59,7 @@ export default function App() {
           <Route path="/ai-voice-demo" element={<VoiceDemoLanding />} />
         </Route>
       </Routes>
+      <Analytics />
     </Router>
   );
 }
