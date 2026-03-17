@@ -3,10 +3,15 @@ import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import { trackPageView, useScrollDepth, useTimeOnPage } from "@/lib/analytics";
 
 export function Layout() {
   const { pathname } = useLocation();
   const [scrollProgress, setScrollProgress] = useState(0);
+
+  // Track page views and analytics
+  useScrollDepth();
+  useTimeOnPage();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -14,6 +19,9 @@ export function Layout() {
     const path = pathname === "/" ? "Home" : pathname.split("/")[1].replace("-", " ");
     const title = path.charAt(0).toUpperCase() + path.slice(1);
     document.title = `${title} | Elevate Digital`;
+
+    // Track page view in Google Analytics
+    trackPageView(pathname, document.title);
   }, [pathname]);
 
   useEffect(() => {
@@ -59,12 +67,19 @@ export function Layout() {
 export function LeadMagnetLayout() {
   const { pathname } = useLocation();
 
+  // Track page views and analytics
+  useScrollDepth();
+  useTimeOnPage();
+
   useEffect(() => {
     window.scrollTo(0, 0);
     
     const path = pathname.split("/")[1].replace(/-/g, " ");
     const title = path.charAt(0).toUpperCase() + path.slice(1);
     document.title = `${title} | Elevate Digital`;
+
+    // Track page view in Google Analytics
+    trackPageView(pathname, document.title);
   }, [pathname]);
 
   return (

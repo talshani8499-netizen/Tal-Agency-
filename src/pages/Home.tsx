@@ -7,6 +7,7 @@ import { services } from "@/data/services";
 import { caseStudies } from "@/data/caseStudies";
 import { motion } from "motion/react";
 import { PhoneCall, MessageSquare, LayoutTemplate, Workflow, ArrowRight, CheckCircle2, Star, TrendingUp, Clock, DollarSign, Users, Globe, Phone } from "lucide-react";
+import { trackCTAClick } from "@/lib/analytics";
 
 const iconMap = {
   PhoneCall,
@@ -50,10 +51,20 @@ export default function Home() {
               </p>
 
               <div className="flex flex-col sm:flex-row items-start gap-4 mb-10">
-                <Button href="/free-ai-audit" size="lg" icon>
+                <Button 
+                  href="/free-ai-audit" 
+                  size="lg" 
+                  icon
+                  onClick={() => trackCTAClick('Get Free AI Audit', '/free-ai-audit')}
+                >
                   Get Your Free AI Audit
                 </Button>
-                <Button href="/contact" variant="ghost" size="lg">
+                <Button 
+                  href="/contact" 
+                  variant="ghost" 
+                  size="lg"
+                  onClick={() => trackCTAClick('Schedule a Call', '/contact')}
+                >
                   Schedule a Call <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </div>
@@ -272,7 +283,12 @@ export default function Home() {
                   </span>
                 ))}
               </div>
-              <Button href="/about" variant="secondary" size="sm">
+              <Button 
+                href="/about" 
+                variant="secondary" 
+                size="sm"
+                onClick={() => trackCTAClick('My Full Story', '/about')}
+              >
                 My Full Story <ArrowRight className="ml-1.5 h-4 w-4" />
               </Button>
             </div>
