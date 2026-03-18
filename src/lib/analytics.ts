@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import type { RefObject } from 'react';
 import ReactGA from 'react-ga4';
 
 // Google Analytics Measurement ID
@@ -11,8 +12,9 @@ export const initializeAnalytics = (): void => {
 
 // Track page views
 export const trackPageView = (path: string, title: string): void => {
-  ReactGA.pageview({
-    path,
+  ReactGA.send({
+    hitType: 'pageview',
+    page: path,
     title,
   });
 };
@@ -118,4 +120,48 @@ export const trackFormSubmission = (formName: string): void => {
     category: 'conversion',
     label: formName,
   });
+};
+
+// Track when a section enters the viewport
+export const trackSectionView = (sectionName: string): void => {
+  trackEvent({
+    action: 'section_view',
+    category: 'engagement',
+    label: sectionName,
+  });
+};
+
+// Track service card interest clicks
+export const trackServiceInterest = (serviceName: string): void => {
+  trackEvent({
+    action: 'service_interest',
+    category: 'engagement',
+    label: serviceName,
+  });
+};
+
+// Hook to fire a section_view event once when the element scrolls into view
+export const useTrackSectionView = (sectionName: string): RefObject<HTMLElement | null> => {
+  const ref = useRef<HTMLElement | null>(null);
+  const hasTracked = useRef(false);
+
+  useEffect(() => {
+    const element = ref.current;
+    if (!element) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasTracked.current) {
+          hasTracked.current = true;
+          trackSectionView(sectionName);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, [sectionName]);
+
+  return ref;
 };
