@@ -1,3 +1,4 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/ui/Card";
@@ -7,7 +8,7 @@ import { services } from "@/data/services";
 import { caseStudies } from "@/data/caseStudies";
 import { motion } from "motion/react";
 import { PhoneCall, MessageSquare, LayoutTemplate, Workflow, ArrowRight, CheckCircle2, Star, TrendingUp, Clock, DollarSign, Users, Globe, Phone } from "lucide-react";
-import { trackCTAClick } from "@/lib/analytics";
+import { trackCTAClick, trackServiceInterest, useTrackSectionView } from "@/lib/analytics";
 
 const iconMap = {
   PhoneCall,
@@ -25,6 +26,11 @@ const serviceMetricHighlights: Record<string, { stat: string; label: string }> =
 
 
 export default function Home() {
+  const founderRef = useTrackSectionView('founder_section');
+  const comparisonRef = useTrackSectionView('mike_vs_marcus');
+  const servicesRef = useTrackSectionView('services_grid');
+  const bookingRef = useTrackSectionView('booking_section');
+
   return (
     <div className="flex flex-col min-h-screen pt-16">
 
@@ -237,7 +243,7 @@ export default function Home() {
       })()}
 
       {/* Founder Section */}
-      <section className="py-20 bg-gradient-to-br from-slate-50 to-blue-50/40 border-y border-slate-200">
+      <section ref={founderRef as React.RefObject<HTMLElement>} className="py-20 bg-gradient-to-br from-slate-50 to-blue-50/40 border-y border-slate-200">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -297,7 +303,7 @@ export default function Home() {
       </section>
 
       {/* Two Business Owners Comparison */}
-      <section className="py-24 bg-slate-50">
+      <section ref={comparisonRef as React.RefObject<HTMLElement>} className="py-24 bg-slate-50">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* Heading */}
@@ -416,7 +422,7 @@ export default function Home() {
       </section>
 
       {/* Services */}
-      <section className="py-24 bg-white">
+      <section ref={servicesRef as React.RefObject<HTMLElement>} className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             label="What We Build"
@@ -481,7 +487,11 @@ export default function Home() {
                   )}
 
                   {/* CTA */}
-                  <Link to={`/services/${service.slug}`} className="inline-flex items-center text-sm font-semibold mt-4 text-blue-600 hover:text-blue-700">
+                  <Link
+                    to={`/services/${service.slug}`}
+                    className="inline-flex items-center text-sm font-semibold mt-4 text-blue-600 hover:text-blue-700"
+                    onClick={() => trackServiceInterest(service.title)}
+                  >
                     Learn more <ArrowRight className="ml-1.5 h-4 w-4" />
                   </Link>
                 </motion.div>
@@ -536,7 +546,9 @@ export default function Home() {
         </div>
       </section>
 
-      <BookingSection />
+      <div ref={bookingRef as React.RefObject<HTMLDivElement>}>
+        <BookingSection />
+      </div>
     </div>
   );
 }
