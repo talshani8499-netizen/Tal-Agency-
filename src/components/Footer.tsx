@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { TrendingUp, Twitter, Linkedin } from "lucide-react";
 import { services } from "@/data/services";
 
 export function Footer() {
@@ -9,25 +8,18 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           {/* Brand */}
           <div className="col-span-1 md:col-span-1">
-            <Link to="/" className="flex items-center gap-2 mb-6">
-              <div className="bg-blue-600 p-1.5 rounded-lg">
-                <TrendingUp className="h-5 w-5 text-white" />
+            <Link to="/" className="inline-block mb-6">
+              <div style={{ overflow: "hidden", height: "48px", width: "70px" }}>
+                <img
+                  src="/images/Potential Logo.jpeg"
+                  alt="Elevate Digital"
+                  style={{ width: "70px", marginTop: "-24px", display: "block", filter: "brightness(0) invert(1)" }}
+                />
               </div>
-              <span className="font-bold text-xl tracking-tight text-white">
-                Elevate<span className="text-blue-400">Digital</span>
-              </span>
             </Link>
             <p className="text-sm text-slate-400 mb-6 max-w-xs">
               Helping US small businesses capture more leads, save time, and grow revenue with intelligent AI automation.
             </p>
-            <div className="flex gap-4">
-              <a href="#" className="text-slate-400 hover:text-white transition-colors" aria-label="Twitter" rel="noopener noreferrer">
-                <Twitter className="h-5 w-5" aria-hidden="true" />
-              </a>
-              <a href="#" className="text-slate-400 hover:text-white transition-colors" aria-label="LinkedIn" rel="noopener noreferrer">
-                <Linkedin className="h-5 w-5" aria-hidden="true" />
-              </a>
-            </div>
           </div>
 
           {/* Quick Links */}
