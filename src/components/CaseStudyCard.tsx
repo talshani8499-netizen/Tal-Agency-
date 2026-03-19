@@ -113,6 +113,8 @@ export function CaseStudyCard({ study, isOpen, onToggle }: Props) {
           <div className="flex items-center justify-between">
             <button
               onClick={onToggle}
+              aria-expanded={isOpen}
+              aria-controls={`story-panel-${study.id}`}
               className="flex items-center cursor-pointer border-none bg-transparent p-0"
               style={{ gap: isOpen ? "12px" : "8px", transition: "gap 0.2s" }}
             >
@@ -202,6 +204,8 @@ export function CaseStudyCard({ study, isOpen, onToggle }: Props) {
         Using 9999px breaks collapse animation. 600px gives natural timing without clipping.
       */}
       <div
+        id={`story-panel-${study.id}`}
+        aria-hidden={!isOpen}
         style={{
           maxHeight: isOpen ? "600px" : "0",
           opacity: isOpen ? 1 : 0,

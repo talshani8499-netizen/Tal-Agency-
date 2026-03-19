@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import { CTABanner } from "@/components/ui/CTABanner"
 import { caseStudies } from "@/data/caseStudies"
 import { CaseStudyCard } from "@/components/CaseStudyCard"
@@ -37,13 +37,12 @@ export default function CaseStudies() {
           style={{ maxWidth: "1040px" }}
         >
           {caseStudies.map((study) => (
-            <React.Fragment key={study.id}>
-              <CaseStudyCard
-                study={study}
-                isOpen={openId === study.id}
-                onToggle={() => handleToggle(study.id)}
-              />
-            </React.Fragment>
+            <CaseStudyCard
+              key={study.id}
+              study={study}
+              isOpen={openId === study.id}
+              onToggle={() => handleToggle(study.id)}
+            />
           ))}
         </div>
       </section>
