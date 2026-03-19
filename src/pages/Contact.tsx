@@ -2,6 +2,7 @@ import { SectionHeading } from "@/components/ui/Card";
 import { ContactForm } from "@/components/ContactForm";
 import { Mail, Phone, Clock } from "lucide-react";
 import { motion } from "motion/react";
+import { BookingSection } from "@/components/BookingSection";
 
 export default function Contact() {
   return (
@@ -67,19 +68,6 @@ export default function Contact() {
                   </div>
                 </div>
               </div>
-
-              <div className="glass-panel p-8 rounded-3xl border-accent/20 relative overflow-hidden group">
-                <div className="absolute inset-0 bg-gradient-to-br from-accent/10 to-transparent opacity-50" />
-                <div className="relative z-10">
-                  <h3 className="text-xl font-serif text-text-heading mb-4">Not ready for a call?</h3>
-                  <p className="text-text-body mb-8 leading-relaxed">
-                    Take our free 2-minute AI audit to see exactly where your business is leaking money and how automation can fix it.
-                  </p>
-                  <a href="/free-ai-audit" className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-accent text-bg-primary font-medium hover:bg-accent/90 transition-colors w-full tracking-wide">
-                    Start Free Audit
-                  </a>
-                </div>
-              </div>
             </motion.div>
 
             {/* Contact Form */}
@@ -101,6 +89,7 @@ export default function Contact() {
           </div>
         </div>
       </section>
+      <BookingSection />
     </div>
   );
 }
