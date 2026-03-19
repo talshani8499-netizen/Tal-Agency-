@@ -5,9 +5,8 @@ import { SectionHeading } from "@/components/ui/Card";
 import { BookingSection } from "@/components/BookingSection";
 import { FounderImage } from "@/components/FounderImage";
 import { services } from "@/data/services";
-import { caseStudies } from "@/data/caseStudies";
 import { motion } from "motion/react";
-import { PhoneCall, MessageSquare, LayoutTemplate, Workflow, ArrowRight, CheckCircle2, Star, TrendingUp, Clock, DollarSign, Users, Globe, Phone } from "lucide-react";
+import { PhoneCall, MessageSquare, LayoutTemplate, Workflow, ArrowRight, CheckCircle2, TrendingUp, Clock, DollarSign, Users, Globe, Phone } from "lucide-react";
 import { trackCTAClick, trackServiceInterest, useTrackSectionView } from "@/lib/analytics";
 
 const iconMap = {
@@ -497,51 +496,6 @@ export default function Home() {
                 </motion.div>
               );
             })}
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            label="Client Results"
-            title="Real Businesses. Real Numbers."
-            subtitle="See exactly how we've helped SMBs across the US cut costs and capture more revenue."
-            centered
-          />
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-            {caseStudies.map((study, index) => (
-              <motion.div
-                key={study.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.5, delay: index * 0.08 }}
-                className="bg-white rounded-xl border border-slate-200 p-8 flex flex-col hover:shadow-md transition-shadow duration-200"
-              >
-                <div className="flex gap-1 mb-5">
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <Star key={star} className="h-4 w-4 fill-amber-400 text-amber-400" />
-                  ))}
-                </div>
-
-                <blockquote className="text-base text-slate-700 mb-6 flex-grow leading-relaxed">
-                  "{study.testimonial.quote}"
-                </blockquote>
-
-                <div className="mb-6">
-                  <div className="font-semibold text-slate-900 text-sm">{study.testimonial.author}</div>
-                  <div className="text-xs text-slate-500 mt-0.5">{study.client}</div>
-                </div>
-
-                <div className="mt-auto pt-5 border-t border-slate-100">
-                  <div className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Key Result</div>
-                  <div className="text-2xl font-extrabold text-emerald-600">{study.resultTag}</div>
-                </div>
-              </motion.div>
-            ))}
           </div>
         </div>
       </section>
