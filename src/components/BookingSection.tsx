@@ -2,8 +2,12 @@ import { useEffect } from "react";
 
 export function BookingSection() {
   useEffect(() => {
+    // Guard against duplicate script injection
+    if (document.getElementById("cal-embed-script")) return;
+
     // Inject the Cal.com embed script exactly as provided
     const script = document.createElement("script");
+    script.id = "cal-embed-script";
     script.type = "text/javascript";
     script.innerHTML = `
       (function (C, A, L) {
