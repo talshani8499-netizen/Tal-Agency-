@@ -2,7 +2,6 @@ import { SectionHeading } from "@/components/ui/Card";
 import { ContactForm } from "@/components/ContactForm";
 import { Mail, Phone, Clock } from "lucide-react";
 import { motion } from "motion/react";
-import { BookingSection } from "@/components/BookingSection";
 
 export default function Contact() {
   return (
@@ -89,7 +88,6 @@ export default function Contact() {
           </div>
         </div>
       </section>
-      <BookingSection />
     </div>
   );
 }
