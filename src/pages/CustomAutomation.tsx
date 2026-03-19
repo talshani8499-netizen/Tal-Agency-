@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/Button";
-import { CTABanner } from "@/components/ui/CTABanner";
+import { BookingSection } from "@/components/BookingSection";
 import { motion } from "motion/react";
 import {
   Workflow,
@@ -574,7 +574,7 @@ export default function CustomAutomation() {
         </div>
       </section>
 
-      <CTABanner />
+      <BookingSection />
     </div>
   );
 }

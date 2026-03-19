@@ -1,6 +1,6 @@
 import { SectionHeading, Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
-import { CTABanner } from "@/components/ui/CTABanner";
+import { BookingSection } from "@/components/BookingSection";
 import { blogPosts } from "@/data/blogPosts";
 import { motion } from "motion/react";
 import { Calendar, Clock, ArrowRight } from "lucide-react";
@@ -101,7 +101,7 @@ export default function Blog() {
         </div>
       </section>
 
-      <CTABanner />
+      <BookingSection />
     </div>
   );
 }

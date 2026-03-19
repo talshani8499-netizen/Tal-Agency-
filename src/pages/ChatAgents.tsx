@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/Button";
-import { CTABanner } from "@/components/ui/CTABanner";
+import { BookingSection } from "@/components/BookingSection";
 import { motion } from "motion/react";
 import {
   MessageSquare,
@@ -475,7 +475,7 @@ export default function ChatAgents() {
         </div>
       </section>
 
-      <CTABanner />
+      <BookingSection />
     </div>
   );
 }

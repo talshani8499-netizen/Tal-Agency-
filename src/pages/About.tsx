@@ -1,5 +1,5 @@
 import { Card } from "@/components/ui/Card";
-import { CTABanner } from "@/components/ui/CTABanner";
+import { BookingSection } from "@/components/BookingSection";
 import { FounderImage } from "@/components/FounderImage";
 import { motion } from "motion/react";
 import { Target, Shield, Zap, Users } from "lucide-react";
@@ -202,7 +202,7 @@ export default function About() {
         </div>
       </section>
 
-      <CTABanner />
+      <BookingSection />
     </div>
   );
 }
