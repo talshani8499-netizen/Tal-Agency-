@@ -42,6 +42,7 @@ export const caseStudies: CaseStudy[] = [
     cardGradient: "linear-gradient(145deg, #1B2E3C 0%, #0D1B24 100%)",
     cardAccentColor: "#A0622A",
     cardSubtitle: "DESIGN&BUILD LLC",
+    imageUrl: "/images/horizon-logo.png",
     resultTag: "3× More Qualified Leads",
     headline: "How Horizon Design&Build Went From Zero Digital Presence to $280K/Month in 21 Days",
     teaser: "They had no website, no lead capture, no follow-up system. Every inquiry was a missed call or a lost email. We rebuilt the entire pipeline from scratch and automated it.",
