@@ -34,23 +34,23 @@ export function ContactForm() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-text-heading mb-2">Full Name</label>
-          <input 
-            type="text" 
-            id="name" 
-            name="name" 
-            required 
-            className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-text-heading placeholder-white/30 focus:ring-1 focus:ring-accent focus:border-accent outline-none transition-all backdrop-blur-sm"
+          <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            className="w-full px-4 py-3 rounded-lg bg-white border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-all"
             placeholder="John Doe"
           />
         </div>
         <div>
           <label htmlFor="email" className="block text-sm font-medium text-text-heading mb-2">Work Email</label>
-          <input 
-            type="email" 
-            id="email" 
-            name="email" 
-            required 
-            className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-text-heading placeholder-white/30 focus:ring-1 focus:ring-accent focus:border-accent outline-none transition-all backdrop-blur-sm"
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            className="w-full px-4 py-3 rounded-lg bg-white border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-all"
             placeholder="john@company.com"
           />
         </div>
@@ -58,24 +58,24 @@ export function ContactForm() {
       
       <div>
         <label htmlFor="company" className="block text-sm font-medium text-text-heading mb-2">Business Name</label>
-        <input 
-          type="text" 
-          id="company" 
-          name="company" 
-          required 
-          className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-text-heading placeholder-white/30 focus:ring-1 focus:ring-accent focus:border-accent outline-none transition-all backdrop-blur-sm"
+        <input
+          type="text"
+          id="company"
+          name="company"
+          required
+          className="w-full px-4 py-3 rounded-lg bg-white border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-all"
           placeholder="Acme Corp"
         />
       </div>
 
       <div>
         <label htmlFor="message" className="block text-sm font-medium text-text-heading mb-2">How can we help you grow?</label>
-        <textarea 
-          id="message" 
-          name="message" 
-          rows={4} 
-          required 
-          className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-text-heading placeholder-white/30 focus:ring-1 focus:ring-accent focus:border-accent outline-none transition-all resize-none backdrop-blur-sm"
+        <textarea
+          id="message"
+          name="message"
+          rows={4}
+          required
+          className="w-full px-4 py-3 rounded-lg bg-white border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-all resize-none"
           placeholder="Tell us about your current bottlenecks..."
         />
       </div>
