@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, ChevronDown, MessageSquare } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "./ui/Button";
 import { cn } from "@/lib/utils";
 import { services } from "@/data/services";
@@ -112,16 +112,8 @@ export function Header() {
               ))}
             </nav>
 
-            {/* CTA Button + chat availability indicator */}
+            {/* CTA Button */}
             <div className="hidden md:flex items-center gap-3">
-              <div className="flex items-center gap-1.5 text-xs text-slate-500 select-none" role="status" aria-label="Free consultation available">
-                <MessageSquare className="h-3.5 w-3.5 text-slate-400" aria-hidden="true" />
-                <span className="relative flex h-2 w-2" aria-hidden="true">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-                </span>
-                <span>Free Consultation</span>
-              </div>
               <Button href="/contact" size="sm">
                 Book a Free Strategy Call
               </Button>
