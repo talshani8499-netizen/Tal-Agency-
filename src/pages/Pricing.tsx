@@ -1,7 +1,8 @@
 import { SectionHeading } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { FAQAccordion } from "@/components/ui/FAQAccordion";
-import { CTABanner } from "@/components/ui/CTABanner";
+import { QuoteBuilder } from "@/components/QuoteBuilder";
+import { BookingSection } from "@/components/BookingSection";
 import { pricingTiers, faqs } from "@/data/pricing";
 import { motion } from "motion/react";
 import { Check } from "lucide-react";
@@ -92,6 +93,8 @@ export default function Pricing() {
         </div>
       </section>
 
+      <QuoteBuilder />
+
       {/* FAQ */}
       <section className="py-32 relative">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -106,7 +109,7 @@ export default function Pricing() {
         </div>
       </section>
 
-      <CTABanner />
+      <BookingSection />
     </div>
   );
 }
