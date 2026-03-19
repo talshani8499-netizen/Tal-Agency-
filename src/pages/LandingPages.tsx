@@ -165,7 +165,7 @@ export default function LandingPages() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   return (
-    <div className="flex flex-col min-h-screen pt-16">
+    <div className="flex flex-col min-h-screen">
 
       {/* ── Hero ──────────────────────────────────────────────────────────── */}
       <section className="bg-gradient-to-br from-slate-50 via-white to-blue-50 pt-12 pb-20 lg:pt-16 lg:pb-28">
