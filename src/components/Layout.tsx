@@ -54,7 +54,7 @@ export function Layout() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.4, ease: "easeOut" }}
-          className="flex-grow pt-32 pb-16"
+          className="flex-grow pt-16 pb-16"
         >
           <Outlet />
         </motion.main>
