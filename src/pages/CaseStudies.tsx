@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { CTABanner } from "@/components/ui/CTABanner"
+import { BookingSection } from "@/components/BookingSection"
 import { caseStudies } from "@/data/caseStudies"
 import { CaseStudyCard } from "@/components/CaseStudyCard"
 
@@ -47,7 +47,7 @@ export default function CaseStudies() {
         </div>
       </section>
 
-      <CTABanner />
+      <BookingSection />
     </div>
   )
 }
