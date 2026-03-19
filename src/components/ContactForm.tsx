@@ -39,7 +39,7 @@ export function ContactForm() {
             id="name"
             name="name"
             required
-            className="w-full px-4 py-3 rounded-lg bg-white border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-all"
+            className="w-full px-4 py-3 rounded-lg bg-white border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent transition-all"
             placeholder="John Doe"
           />
         </div>
@@ -50,7 +50,7 @@ export function ContactForm() {
             id="email"
             name="email"
             required
-            className="w-full px-4 py-3 rounded-lg bg-white border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-all"
+            className="w-full px-4 py-3 rounded-lg bg-white border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent transition-all"
             placeholder="john@company.com"
           />
         </div>
@@ -63,7 +63,7 @@ export function ContactForm() {
           id="company"
           name="company"
           required
-          className="w-full px-4 py-3 rounded-lg bg-white border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-all"
+          className="w-full px-4 py-3 rounded-lg bg-white border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent transition-all"
           placeholder="Acme Corp"
         />
       </div>
@@ -75,7 +75,7 @@ export function ContactForm() {
           name="message"
           rows={4}
           required
-          className="w-full px-4 py-3 rounded-lg bg-white border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition-all resize-none"
+          className="w-full px-4 py-3 rounded-lg bg-white border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent transition-all resize-none"
           placeholder="Tell us about your current bottlenecks..."
         />
       </div>
