@@ -15,7 +15,10 @@ export default function CaseStudyDetail() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Header */}
-      <section className={`pt-4 pb-32 ${study.image} relative overflow-hidden`}>
+      <section
+        className="pt-4 pb-32 relative overflow-hidden"
+        style={{ background: study.cardGradient }}
+      >
         <div className="absolute inset-0 bg-background/80 mix-blend-multiply" />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
@@ -23,7 +26,7 @@ export default function CaseStudyDetail() {
             {study.client}
           </h1>
           <p className="text-2xl text-text-body font-medium max-w-2xl mx-auto leading-relaxed">
-            {study.solutionSummary}
+            {study.story.solution}
           </p>
         </div>
       </section>
@@ -40,7 +43,7 @@ export default function CaseStudyDetail() {
                 </div>
                 <div>
                   <p className="text-xs text-text-muted font-sans font-semibold uppercase tracking-widest mb-1">Key Result</p>
-                  <p className="text-4xl font-serif text-accent">{study.keyMetric}</p>
+                  <p className="text-4xl font-serif text-accent">{study.resultTag}</p>
                 </div>
               </div>
               <Button href="/contact" size="lg" className="w-full md:w-auto">
@@ -50,7 +53,7 @@ export default function CaseStudyDetail() {
             <div className="border-t border-accent/10 pt-5">
               <p className="text-xs text-text-muted font-sans font-semibold uppercase tracking-widest mb-3">Stack Used</p>
               <div className="flex flex-wrap gap-2">
-                {study.bundle.map((item) => (
+                {study.services.map((item) => (
                   <span key={item} className="text-xs font-medium bg-background border border-accent/20 text-text-body px-3 py-1 rounded-full">
                     {item}
                   </span>
@@ -62,12 +65,12 @@ export default function CaseStudyDetail() {
           <div className="prose prose-lg prose-invert max-w-none prose-headings:font-serif prose-headings:text-text-heading prose-p:text-text-body prose-p:leading-relaxed">
             <h2 className="text-3xl md:text-4xl font-serif text-text-heading mb-8">The Challenge</h2>
             <p className="text-xl text-text-body leading-relaxed mb-16">
-              {study.challengeSummary}
+              {study.story.problem}
             </p>
 
             <h2 className="text-3xl md:text-4xl font-serif text-text-heading mb-8">The Solution & Implementation</h2>
             <p className="text-lg text-text-body leading-relaxed mb-16">
-              {study.fullStory}
+              {study.story.solution}
             </p>
 
             <div className="glass-panel rounded-3xl p-12 my-20 relative overflow-hidden group">
@@ -83,14 +86,16 @@ export default function CaseStudyDetail() {
               </blockquote>
             </div>
 
-            <h2 className="text-3xl md:text-4xl font-serif text-text-heading mb-8">Key Takeaways</h2>
+            <h2 className="text-3xl md:text-4xl font-serif text-text-heading mb-8">Key Outcomes</h2>
             <ul className="space-y-6 mb-16 list-none pl-0">
-              {study.takeaways.map((takeaway) => (
-                <li key={takeaway} className="flex items-start gap-4">
+              {study.story.outcomeStats.map((stat) => (
+                <li key={stat.label} className="flex items-start gap-4">
                   <div className="h-8 w-8 rounded-full glass-panel text-accent flex items-center justify-center shrink-0 mt-1 border-accent/20">
                     <Check className="h-4 w-4" strokeWidth={1.5} />
                   </div>
-                  <span className="text-lg text-text-body leading-relaxed">{takeaway}</span>
+                  <span className="text-lg text-text-body leading-relaxed">
+                    <strong>{stat.value}</strong> — {stat.label}
+                  </span>
                 </li>
               ))}
             </ul>

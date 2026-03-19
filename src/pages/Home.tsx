@@ -538,7 +538,7 @@ export default function Home() {
 
                 <div className="mt-auto pt-5 border-t border-slate-100">
                   <div className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Key Result</div>
-                  <div className="text-2xl font-extrabold text-emerald-600">{study.keyMetric}</div>
+                  <div className="text-2xl font-extrabold text-emerald-600">{study.resultTag}</div>
                 </div>
               </motion.div>
             ))}

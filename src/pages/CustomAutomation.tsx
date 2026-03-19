@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { CTABanner } from "@/components/ui/CTABanner";
 import { motion } from "motion/react";
@@ -561,13 +561,14 @@ export default function CustomAutomation() {
 
           <div className="flex flex-col gap-3">
             {faqs.map((faq, i) => (
-              <FAQItem
-                key={i}
-                q={faq.q}
-                a={faq.a}
-                open={openFaq === i}
-                onToggle={() => setOpenFaq(openFaq === i ? null : i)}
-              />
+              <React.Fragment key={i}>
+                <FAQItem
+                  q={faq.q}
+                  a={faq.a}
+                  open={openFaq === i}
+                  onToggle={() => setOpenFaq(openFaq === i ? null : i)}
+                />
+              </React.Fragment>
             ))}
           </div>
         </div>
