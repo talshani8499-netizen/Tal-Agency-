@@ -4,11 +4,23 @@ import { Footer } from "./Footer";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { trackPageView, useScrollDepth, useTimeOnPage } from "@/lib/analytics";
-import { MessageSquare } from "lucide-react";
+import { AuditOrbWithBubble } from "./AuditOrb";
+import { AuditWizard } from "./AuditWizard";
 
 export function Layout() {
   const { pathname } = useLocation();
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [isAuditOpen, setIsAuditOpen] = useState(false);
+  const [hasBeenOpened, setHasBeenOpened] = useState(false);
+  const [orbAwake, setOrbAwake] = useState(false);
+
+  // Trigger awake state 3 seconds after initial mount
+  useEffect(() => {
+    const timer = setTimeout(() => setOrbAwake(true), 3000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const orbState = orbAwake && !hasBeenOpened ? "awake" : "idle";
 
   // Track page views and analytics
   useScrollDepth();
@@ -61,21 +73,37 @@ export function Layout() {
         </motion.main>
       </AnimatePresence>
       <Footer />
-      {/* Floating Chat Bubble — visual hook */}
-      <div
-        className="fixed bottom-6 right-6 z-40 flex items-center gap-3 bg-blue-600 text-white px-4 py-3 rounded-full shadow-lg cursor-default select-none"
-        role="complementary"
-        aria-label="Quick Business AI Audit"
-      >
-        <div className="shrink-0 h-8 w-8 rounded-full bg-white/20 flex items-center justify-center">
-          <MessageSquare className="h-4 w-4 text-white" aria-hidden="true" />
-        </div>
-        <span className="text-sm font-semibold leading-tight hidden sm:inline">Quick Business AI Audit</span>
-        <span className="absolute -top-1 -right-1 flex h-3 w-3" aria-hidden="true">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-          <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500" />
-        </span>
-      </div>
+      {/* Floating AI Audit Bubble — conditionally rendered for AnimatePresence exit */}
+      <AnimatePresence>
+        {!isAuditOpen && (
+          <motion.button
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ scale: 1.1, opacity: 0 }}
+            transition={{ duration: 0.15 }}
+            onClick={() => {
+              setIsAuditOpen(true);
+              setHasBeenOpened(true);
+            }}
+            aria-label="Open Quick Business AI Audit"
+            className="fixed bottom-6 right-6 z-40 flex items-center gap-3 bg-blue-600 text-white px-4 py-3 rounded-full shadow-lg select-none cursor-pointer hover:bg-blue-700 transition-colors"
+          >
+            <AuditOrbWithBubble size={32} state={orbState} approveCount={0} />
+            <span className="text-sm font-semibold leading-tight hidden sm:inline">
+              Quick Business AI Audit
+            </span>
+            <span className="absolute -top-1 -right-1 flex h-3 w-3" aria-hidden="true">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500" />
+            </span>
+          </motion.button>
+        )}
+      </AnimatePresence>
+
+      <AuditWizard
+        open={isAuditOpen}
+        onClose={() => setIsAuditOpen(false)}
+      />
     </div>
   );
 }
