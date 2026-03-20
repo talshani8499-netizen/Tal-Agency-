@@ -8,7 +8,7 @@
 
 ## Overview
 
-A floating "Quick Business AI Audit" bubble lives on every page (already shipped in `Layout.tsx`). After 3 seconds from initial app load, an animated AI orb character wakes up on the bubble with a speech bubble: *"You should click it 👆"*. Clicking the bubble (a `<button>`) opens a bottom-drawer wizard — 7 discovery steps, a lead gate (name + email), a rule-based results card with ROI estimates, and an inline Cal.com booking.
+A floating "Quick Business AI Audit" bubble currently lives on every page as a static `<div>` (already shipped in `Layout.tsx`). **This feature converts it to an interactive `<button>`.** After 3 seconds from initial app load, an animated AI orb character wakes up on the bubble with a speech bubble: *"You should click it 👆"*. The speech bubble stays visible until the user clicks — it does not auto-dismiss. Clicking the bubble opens a bottom-drawer wizard — 7 discovery steps, a lead gate (name + email), a rule-based results card with ROI estimates, and an inline Cal.com booking.
 
 The 3-second "awake" animation fires **once** per app session. After the user clicks and opens the wizard, the orb returns to idle state when the drawer closes and does **not** re-awaken during that session. This state lives in component state (`Layout.tsx`) — not `localStorage`.
 
@@ -29,7 +29,7 @@ Tone throughout: **smooth, business-oriented, positive encouragement at each ste
 ### Modified Files
 | File | Change |
 |------|--------|
-| `src/components/Layout.tsx` | Add `isAuditOpen: boolean` state and `hasBeenOpened: boolean` state. Convert the bubble from a `<div>` to a `<button>` with `onClick={() => { setIsAuditOpen(true); setHasBeenOpened(true); }}`. The bubble's inner content — the `MessageSquare` icon, text label, and pinging dot — is **replaced entirely** by `<AuditOrb size={32} state={orbState} approveCount={0} />`. `orbState` is `"awake"` if 3 seconds have elapsed and `!hasBeenOpened`, else `"idle"`. Add `<AuditWizard open={isAuditOpen} onClose={() => setIsAuditOpen(false)} />` after `<Footer />`. |
+| `src/components/Layout.tsx` | Add `isAuditOpen: boolean` state and `hasBeenOpened: boolean` state. Convert the existing bubble `<div>` to a `<button>` with `onClick={() => { setIsAuditOpen(true); setHasBeenOpened(true); }}`. The bubble's inner content — the `MessageSquare` icon, text label ("Quick Business AI Audit"), and pinging dot — is **replaced entirely** by `<AuditOrb size={32} state={orbState} approveCount={0} />` plus a text label `"Quick Business AI Audit"` (the label is kept for context). **The bubble unmounts (conditionally renders `null`) when `isAuditOpen === true`** so `AnimatePresence` can play its exit animation. When the drawer closes (`isAuditOpen` returns to `false`), the bubble re-mounts with a simple fade-in entrance (`initial={{ opacity: 0 }} animate={{ opacity: 1 }}`). The `approveCount={0}` passed to the bubble's orb is a constant — the bubble orb never plays a brightness surge, and this is intentional. `orbState` is `"awake"` if 3 seconds have elapsed and `!hasBeenOpened`, else `"idle"`. Add `<AuditWizard open={isAuditOpen} onClose={() => setIsAuditOpen(false)} />` after `<Footer />`. |
 
 ### Existing Files Used (unchanged)
 - `src/components/ui/Button.tsx` — CTA buttons inside the wizard
@@ -109,7 +109,7 @@ interface AuditOrbProps {
 }
 ```
 
-**`approveCount` pattern:** The parent holds `approveCount` in state and increments it (`setApproveCount(c => c + 1)`) whenever the user selects an answer. The orb's `useEffect` watches `[approveCount]` and plays the brightness surge (`filter: brightness(1.4)`) whenever `approveCount` changes (including the first time). This is the idiomatic React pattern for triggering imperative animations without a reset callback.
+**`approveCount` pattern:** The parent holds `approveCount` in state and increments it (`setApproveCount(c => c + 1)`) whenever the user selects an answer. The orb's `useEffect` watches `[approveCount]` and plays the brightness surge (`filter: brightness(1.4)`) on changes. **Skip the initial mount:** use a `useRef(false)` initialized to `false`; set it to `true` after first render; skip the effect if the ref is still `false`. This ensures no spurious flash when the orb first renders inside the drawer.
 
 ### Animation States
 
@@ -118,19 +118,21 @@ interface AuditOrbProps {
 - Soft glow: `boxShadow` breathes with the pulse
 
 **2. Awake** (triggered 3s after app load, while `!hasBeenOpened`)
+- The idle scale pulse is **suspended** while the awake sequence plays (Motion's `animate` prop is changed from the loop to the awake sequence).
 - Orb "inhales": quick scale-up to 1.15 over 200ms
 - Speech bubble fades in attached above the orb
 - Speech bubble text: *"You should click it 👆"* rendered with typewriter effect (~80ms per character)
 - Subtle bounce: orb does a small y-axis bounce (`-4px`) after typewriter completes
+- After the bounce, the orb holds at scale 1.0 with the speech bubble **remaining visible** until the user clicks. The idle pulse does NOT resume while the speech bubble is shown.
 
 **3. Active** (inside the open drawer)
 - Orb sits top-left of drawer header, 40×40px (32×32px on mobile)
-- Slow idle pulse continues
-- On `approveCount` change: brightness surge (`filter: brightness(1.4)`) over 300ms then back
+- Slow idle pulse resumes
+- On `approveCount` change: brightness surge (`filter: brightness(1.4)`) over 300ms then back to `brightness(1.0)`
 
 ### Bubble → Drawer Transition
-1. User clicks the bubble `<button>` → `setIsAuditOpen(true)` fires **immediately** on click (no delay). Simultaneously, the bubble plays a scale-up to 1.1 + fade-out over 150ms via Motion (the bubble uses `AnimatePresence` for exit animation).
-2. The drawer slides up from `translateY(100%)` to `translateY(0)` over 300ms, spring easing — this starts at the same time as step 1 because `isAuditOpen` is set immediately.
+1. User clicks the bubble `<button>` → `setIsAuditOpen(true)` fires **immediately** on click. Because the bubble is conditionally rendered and wrapped in `AnimatePresence`, it plays its exit animation (`scale: 1.1, opacity: 0` over 150ms) before unmounting.
+2. Simultaneously (because `isAuditOpen` is `true` immediately), the drawer slides up from `translateY(100%)` to `translateY(0)` over 300ms with spring easing.
 3. Orb fades into drawer header with a 120ms entrance bounce.
 
 ---
@@ -138,6 +140,16 @@ interface AuditOrbProps {
 ## Component: AuditWizard
 
 A bottom-anchored drawer. On desktop: max-height 85vh, max-width 680px, centered horizontally, rounded top corners. On mobile: full viewport width, same max-height. **z-index: 50** (above navbar which is z-40).
+
+### Props
+```ts
+interface AuditWizardProps {
+  open: boolean;
+  onClose: () => void;
+}
+```
+
+**State reset on close:** When `open` transitions from `true` to `false` (via ✕ button, ESC, or external `onClose` call), the wizard resets `WizardState` to its initial values **after** the drawer's exit animation completes (300ms). This way the drawer slides down fully before state clears, preventing a flash of the first step during close.
 
 ### Backdrop
 A full-screen overlay `<div>` with `position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 49` sits behind the drawer. Clicking it does NOT close the drawer. `aria-hidden="true"` on the backdrop.
@@ -197,14 +209,14 @@ type Answers = {
 - Selecting an option → sets answer → increments `approveCount` → sets `encouragementVisible: true` → shows encouragement text for 1200ms → sets `encouragementVisible: false` → auto-advances to next step
 - Step content slides out to the left, next step slides in from the right (Motion `AnimatePresence`, `x: ±40`, opacity 0→1)
 - When navigating **back**, `encouragementVisible` resets to `false` immediately
-- Progress bar at top fills proportionally: `(currentStep / 7) * 100%`
+- Progress bar at top fills proportionally: `(step / 7) * 100` where `step` is the `WizardState.step` value (1–7). At Step 7 this reaches 100% — this is intentional UX (signals "you're almost done, just one more thing") before the lead gate.
 - Back chevron (`‹`) top-left allows going back (except Step 1)
 
 ### Close Behaviour
 - ✕ button always visible top-right
 - Backdrop click: does NOT close
 - ESC key: if step ≤ 1 → close immediately; if step ≥ 2 → show ESC confirmation
-- **ESC confirmation UI:** A centered overlay panel inside the drawer (position: absolute, inset-x-4, centered vertically) with text *"Are you sure? You'll lose your progress."* and two buttons: "Keep Going" (dismisses confirmation) and "Close Anyway" (closes drawer). The confirmation overlays the current step content without replacing it.
+- **ESC confirmation UI:** A centered overlay panel inside the drawer (`position: absolute; inset: 0; z-index: 20; display: flex; align-items: center; justify-content: center`). Behind the panel, the step content is dimmed by a semi-transparent scrim (`background: rgba(0,0,0,0.3)`). The panel itself is a white/dark card with text *"Are you sure? You'll lose your progress."* and two buttons: "Keep Going" (dismisses confirmation, scrim disappears) and "Close Anyway" (calls `onClose`). The full-screen backdrop (z-49) remains `aria-hidden` and non-interactive — it does not respond to clicks while the confirmation is visible.
 
 ---
 
@@ -215,9 +227,10 @@ Each step: large headline, small sub-label, answer options as tap-friendly cards
 ### Step 1 — Industry
 **Headline:** *"What type of business do you run?"*
 **Options (canonical values):** `"Home Services"` · `"Law Firm"` · `"Dental / Medical"` · `"Real Estate"` · `"E-commerce"` · `"Contractor"` · `"Other"`
-- Selecting `"Other"` reveals a text input below the cards for custom entry (stores to `answers.industryCustom`). A "Continue →" button replaces auto-advance for this option.
-- All other options auto-advance after 1200ms encouragement.
-**Encouragement:** *"Great — we know this space well."*
+- Selecting `"Other"` reveals a text input below the cards for custom entry (stores to `answers.industryCustom`). The text input is optional — the Continue button is disabled only while `answers.industryCustom` is an empty string; typing any character enables it.
+- Clicking "Continue →" sets `answers.industry = "Other"`, increments `approveCount`, shows encouragement for 1200ms, then auto-advances to Step 2.
+- All other options auto-advance after 1200ms encouragement (no Continue button).
+**Encouragement:** *"Great — we know this space well."* (shown for all industry selections including "Other")
 
 ### Step 2 — Biggest Pain
 **Headline:** *"What's your #1 growth bottleneck right now?"*
@@ -284,12 +297,15 @@ On valid form submit:
 
 Duration: 1500ms fake delay.
 
-Orb pulses rapidly (scale 1.0 → 1.2 → 1.0, period 600ms). Text cycles:
-1. *"Analyzing your business..."* (fade in 0ms, fade out 500ms)
-2. *"Identifying opportunities..."* (fade in 500ms, fade out 1000ms)
-3. *"Calculating your ROI..."* (fade in 1000ms, stays)
+Orb pulses rapidly (scale 1.0 → 1.2 → 1.0, period 600ms). Text cycles (sequential, no overlap):
 
-After 1500ms, call `runAuditEngine(answers)`, store result in `auditResult`, advance to step 10.
+| Text | Starts visible at | Fades out starting at | Fade duration |
+|------|------------------|----------------------|---------------|
+| *"Analyzing your business..."* | t = 0ms (fade in 100ms) | t = 400ms | 100ms |
+| *"Identifying opportunities..."* | t = 500ms (fade in 100ms) | t = 900ms | 100ms |
+| *"Calculating your ROI..."* | t = 1000ms (fade in 100ms) | stays visible | — |
+
+Only one text is visible at a time. After 1500ms total, call `runAuditEngine(answers)`, store result in `auditResult`, advance to step 10.
 
 ---
 
@@ -325,7 +341,9 @@ Scoring uses the canonical answer values defined above as keys:
 | goal = "Cut costs" | +1 | +1 | 0 | +2 |
 | goal = "All of the above" | +2 | +2 | +1 | +2 |
 
-Services scoring ≥ 2 are recommended, sorted highest-first. Minimum 2 recommendations always returned (lowest-scoring services added to meet minimum), maximum 4.
+Services scoring ≥ 2 are recommended, sorted highest-first. Minimum 2 recommendations always returned, maximum 4.
+
+**Tiebreaking for minimum fill:** If fewer than 2 services score ≥ 2, add services from the sub-threshold set to reach the minimum. Selection rule: pick the **highest-scoring** sub-threshold service(s). Ties broken by fixed priority: `voice > chat > landing > automation`. Fill-up services are **appended after** the qualifying services (not interleaved by score).
 
 ### ROI Estimates
 
@@ -389,19 +407,21 @@ const automationBase = teamMidpoint * 10 * 35;
 ```
 
 ### Output Shape
+**Rounding:** All ROI values (`roiMin`, `roiMax`, `totalMin`, `totalMax`) are rounded to the nearest $50 before use. The `label` field is formatted from rounded values: `"est. $" + roiMin.toLocaleString() + "–$" + roiMax.toLocaleString() + "/mo"`.
+
 ```ts
 type AuditResult = {
   recommendations: ServiceRecommendation[];
-  totalMin: number;   // sum of roiMin across all returned recommendations
-  totalMax: number;   // sum of roiMax across all returned recommendations
+  totalMin: number;   // sum of roiMin across all returned recommendations (rounded to nearest $50)
+  totalMax: number;   // sum of roiMax across all returned recommendations (rounded to nearest $50)
 }
 
 type ServiceRecommendation = {
   service: "voice" | "chat" | "landing" | "automation";
   score: number;
-  roiMin: number;
-  roiMax: number;
-  label: string;       // pre-formatted dollar range: "est. $1,200–$1,950/mo"
+  roiMin: number;     // rounded to nearest $50
+  roiMax: number;     // rounded to nearest $50
+  label: string;       // pre-formatted: "est. $1,200–$1,950/mo"
   description: string; // human-readable impact phrase (see below)
   insight: string;     // personalized one-liner using their answers (see below)
 }
@@ -472,6 +492,8 @@ Purpose-built Cal.com embed for the drawer context. No layout shell, no marketin
   className="rounded-xl border border-white/10"
 />
 ```
+
+**Cal.com dual namespace safety:** The Cal.com embed loader supports multiple named namespaces on the same page — `"elevate-digital"` (used by `BookingSection`) and `"elevate-digital-audit"` (used here) are independent and do not conflict. Both share the same `window.Cal` object but each namespace maintains its own queue. No pages currently mount both simultaneously (most pages with `BookingSection` don't have the drawer open at the same time in normal use), but even if they did, this is safe.
 
 **Initialization:** Same polling pattern as `BookingSection`. Inject the Cal loader script once (guarded by id `"cal-embed-script-audit"` — distinct from `"cal-embed-script"` used by `BookingSection`). Then poll for `window.Cal` and call:
 ```ts
