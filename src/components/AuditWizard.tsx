@@ -145,6 +145,7 @@ export function AuditWizard({ open, onClose }: AuditWizardProps) {
   }
 
   function goBack() {
+    if (advanceTimer.current) clearTimeout(advanceTimer.current);
     setState((s) => ({
       ...s,
       step: Math.max(1, s.step - 1),
