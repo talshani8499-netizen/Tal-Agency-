@@ -106,19 +106,24 @@ const DESCRIPTIONS: Record<ServiceKey, string> = {
 };
 
 function buildInsight(service: ServiceKey, answers: Answers): string {
-  const industryLabel =
-    answers.industry === "Other" && answers.industryCustom
-      ? answers.industryCustom
-      : answers.industry;
   switch (service) {
     case "voice":
       return `Based on your ${answers.leadVolume} monthly leads and after-hours situation, you're leaving revenue on the table every night.`;
     case "chat":
       return `With ${answers.leadVolume} monthly leads coming in, a chat agent captures prospects even when your team is busy.`;
-    case "landing":
+    case "landing": {
+      const industryLabel =
+        answers.industry === "Other" && answers.industryCustom
+          ? answers.industryCustom
+          : answers.industry;
       return `A high-converting landing page tailored to ${industryLabel} businesses can meaningfully lift your close rate.`;
+    }
     case "automation":
       return `For a team of ${answers.teamSize}, automating follow-up and admin could recover hours of billable time weekly.`;
+    default: {
+      const _exhaustive: never = service;
+      throw new Error(`Unhandled service key: ${_exhaustive}`);
+    }
   }
 }
 
@@ -193,8 +198,8 @@ function computeRoi(
       base = teamMidpoint * 10 * 35;
       break;
   }
-  const roiMin = round50(base * 0.8);
-  const roiMax = round50(base * 1.3);
+  const roiMin = Math.max(50, round50(base * 0.8));
+  const roiMax = Math.max(roiMin + 50, round50(base * 1.3));
   return { roiMin, roiMax, label: formatLabel(roiMin, roiMax) };
 }
 
