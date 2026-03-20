@@ -1,5 +1,5 @@
 // src/components/AuditOrb.tsx
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, useAnimation } from "motion/react";
 
 interface AuditOrbProps {
@@ -38,52 +38,31 @@ function useTypewriter(text: string, msPerChar: number, active: boolean) {
 export function AuditOrb({ size = 48, state, approveCount }: AuditOrbProps) {
   const controls = useAnimation();
   const brightnessControls = useAnimation();
-  const isFirstRender = useRef(true);
 
-  // Idle pulse loop
+  // Consolidated state animation — always stop first to prevent competing loops
   useEffect(() => {
-    if (state === "idle") {
+    controls.stop();
+    if (state === "idle" || state === "active") {
       controls.start({
         scale: [1, 1.08, 1],
         transition: { duration: 3, ease: "easeInOut", repeat: Infinity },
       });
+    } else if (state === "awake") {
+      controls.start({
+        scale: [1, 1.15, 1],
+        transition: { duration: 0.2, ease: "easeOut" },
+      });
+    } else if (state === "calculating") {
+      controls.start({
+        scale: [1, 1.2, 1],
+        transition: { duration: 0.6, ease: "easeInOut", repeat: Infinity },
+      });
     }
   }, [state, controls]);
 
-  // Awake sequence (suspends idle pulse)
+  // Brightness surge on approveCount change — skip when no approvals yet
   useEffect(() => {
-    if (state !== "awake") return;
-    controls.stop();
-    controls.start({
-      scale: [1, 1.15, 1],
-      transition: { duration: 0.2, ease: "easeOut" },
-    });
-  }, [state, controls]);
-
-  // Active: resume slow pulse
-  useEffect(() => {
-    if (state !== "active") return;
-    controls.start({
-      scale: [1, 1.08, 1],
-      transition: { duration: 3, ease: "easeInOut", repeat: Infinity },
-    });
-  }, [state, controls]);
-
-  // Calculating: rapid pulse (600ms)
-  useEffect(() => {
-    if (state !== "calculating") return;
-    controls.start({
-      scale: [1, 1.2, 1],
-      transition: { duration: 0.6, ease: "easeInOut", repeat: Infinity },
-    });
-  }, [state, controls]);
-
-  // Brightness surge on approveCount change — skip initial mount
-  useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
-    }
+    if (approveCount === 0) return;
     brightnessControls.start({
       filter: ["brightness(1)", "brightness(1.4)", "brightness(1)"],
       transition: { duration: 0.3, ease: "easeInOut" },
