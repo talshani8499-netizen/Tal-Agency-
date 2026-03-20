@@ -435,7 +435,7 @@ function StepLeadGate({ state, setState }: { state: WizardState; setState: React
         "elevate_audit_lead",
         JSON.stringify({ name: state.name, email: state.email, answers: state.answers, timestamp: Date.now() })
       );
-    } catch {}
+    } catch (err) { console.warn("localStorage save failed", err); }
     if (typeof (window as any).gtag === "function") {
       (window as any).gtag("event", "audit_lead_captured", { name: state.name, email: state.email });
     }
