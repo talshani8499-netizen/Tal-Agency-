@@ -68,10 +68,12 @@ function getEncouragement(step: number, answers: Partial<Answers>): string {
 export function AuditWizard({ open, onClose }: AuditWizardProps) {
   const [state, setState] = useState<WizardState>(INITIAL_STATE);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const advanceTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Reset state 300ms after drawer closes (after exit animation)
   useEffect(() => {
     if (!open) {
+      if (advanceTimer.current) clearTimeout(advanceTimer.current);
       closeTimer.current = setTimeout(() => {
         setState(INITIAL_STATE);
       }, 300);
@@ -121,6 +123,17 @@ export function AuditWizard({ open, onClose }: AuditWizardProps) {
     return () => window.removeEventListener("keydown", handleTab);
   }, [open]);
 
+  function scheduleAdvance() {
+    if (advanceTimer.current) clearTimeout(advanceTimer.current);
+    advanceTimer.current = setTimeout(() => {
+      setState((s) => ({
+        ...s,
+        encouragementVisible: false,
+        step: s.step + 1,
+      }));
+    }, 1200);
+  }
+
   function selectAnswer(field: keyof Answers, value: string) {
     setState((s) => ({
       ...s,
@@ -128,13 +141,7 @@ export function AuditWizard({ open, onClose }: AuditWizardProps) {
       encouragementVisible: true,
       approveCount: s.approveCount + 1,
     }));
-    setTimeout(() => {
-      setState((s) => ({
-        ...s,
-        encouragementVisible: false,
-        step: s.step + 1,
-      }));
-    }, 1200);
+    scheduleAdvance();
   }
 
   function goBack() {
@@ -245,7 +252,7 @@ export function AuditWizard({ open, onClose }: AuditWizardProps) {
 
             {/* Scrollable body */}
             <div className="overflow-y-auto flex-1 px-5 py-6">
-              <StepContent state={state} setState={setState} selectAnswer={selectAnswer} onClose={onClose} />
+              <StepContent state={state} setState={setState} selectAnswer={selectAnswer} onClose={onClose} scheduleAdvance={scheduleAdvance} />
             </div>
           </motion.div>
         </>
@@ -259,9 +266,10 @@ interface StepContentProps {
   setState: React.Dispatch<React.SetStateAction<WizardState>>;
   selectAnswer: (field: keyof Answers, value: string) => void;
   onClose: () => void;
+  scheduleAdvance: () => void;
 }
 
-function StepContent({ state, setState, selectAnswer, onClose }: StepContentProps) {
+function StepContent({ state, setState, selectAnswer, onClose, scheduleAdvance }: StepContentProps) {
   return (
     <AnimatePresence mode="wait">
       <motion.div
@@ -271,7 +279,7 @@ function StepContent({ state, setState, selectAnswer, onClose }: StepContentProp
         exit={{ opacity: 0, x: -40 }}
         transition={{ duration: 0.2 }}
       >
-        {state.step === 1 && <Step1 state={state} selectAnswer={selectAnswer} setState={setState} />}
+        {state.step === 1 && <Step1 state={state} selectAnswer={selectAnswer} setState={setState} scheduleAdvance={scheduleAdvance} />}
         {state.step === 2 && <StepOptions step={2} field="pain" headline="What's your #1 growth bottleneck right now?" options={["Missed calls & leads","Slow follow-up","Website doesn't convert","Too much manual admin","Hard to scale without hiring"] as Pain[]} state={state} selectAnswer={selectAnswer} />}
         {state.step === 3 && <StepOptions step={3} field="teamSize" headline="How many people are on your team?" options={["Just me","2–5","6–15","16–50","50+"] as TeamSize[]} state={state} selectAnswer={selectAnswer} />}
         {state.step === 4 && <StepOptions step={4} field="revenue" headline="Roughly, what's your current monthly revenue?" subLabel="Helps us size your opportunity accurately." options={["Under $10k","$10k–$30k","$30k–$100k","$100k+","Prefer not to say"] as Revenue[]} state={state} selectAnswer={selectAnswer} />}
@@ -286,7 +294,7 @@ function StepContent({ state, setState, selectAnswer, onClose }: StepContentProp
   );
 }
 
-function Step1({ state, selectAnswer, setState }: { state: WizardState; selectAnswer: (field: keyof Answers, value: string) => void; setState: React.Dispatch<React.SetStateAction<WizardState>> }) {
+function Step1({ state, selectAnswer, setState, scheduleAdvance }: { state: WizardState; selectAnswer: (field: keyof Answers, value: string) => void; setState: React.Dispatch<React.SetStateAction<WizardState>>; scheduleAdvance: () => void }) {
   const [customText, setCustomText] = useState("");
   const industries: Industry[] = ["Home Services","Law Firm","Dental / Medical","Real Estate","E-commerce","Contractor","Other"];
   const selected = state.answers.industry;
@@ -301,6 +309,7 @@ function Step1({ state, selectAnswer, setState }: { state: WizardState; selectAn
             label={opt}
             selected={selected === opt}
             onClick={() => {
+              if (state.encouragementVisible) return;
               if (opt !== "Other") {
                 selectAnswer("industry", opt);
               } else {
@@ -329,9 +338,7 @@ function Step1({ state, selectAnswer, setState }: { state: WizardState; selectAn
                 encouragementVisible: true,
                 approveCount: s.approveCount + 1,
               }));
-              setTimeout(() => {
-                setState((s) => ({ ...s, encouragementVisible: false, step: s.step + 1 }));
-              }, 1200);
+              scheduleAdvance();
             }}
           >
             Continue →
