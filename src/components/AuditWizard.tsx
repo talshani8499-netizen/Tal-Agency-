@@ -1,5 +1,5 @@
 // src/components/AuditWizard.tsx
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { X, ChevronLeft, Phone, MessageSquare, Globe, Zap } from "lucide-react"; // Phone, MessageSquare, Globe, Zap used in StepResults (added in Task 5)
 import { Button } from "@/components/ui/Button";
@@ -287,9 +287,9 @@ function StepContent({ state, setState, selectAnswer, onClose, scheduleAdvance }
         {state.step === 5 && <StepOptions step={5} field="afterHours" headline="What happens when someone calls after office hours?" options={["They hit voicemail and rarely call back","We have someone on-call (expensive)","We forward to my personal phone (exhausting)","We just miss the calls","We use a third-party answering service"] as AfterHours[]} state={state} selectAnswer={selectAnswer} />}
         {state.step === 6 && <StepOptions step={6} field="leadVolume" headline="How many inbound leads or calls do you get per month?" options={["Under 20","20–50","50–150","150–500","500+"] as LeadVolume[]} state={state} selectAnswer={selectAnswer} />}
         {state.step === 7 && <StepOptions step={7} field="goal" headline="What matters most to you right now?" options={["Save time","Capture more leads","Cut costs","Scale without hiring","All of the above"] as Goal[]} state={state} selectAnswer={selectAnswer} />}
-        {state.step === 8 && null}
-        {state.step === 9 && null}
-        {state.step === 10 && null}
+        {state.step === 8 && <StepLeadGate state={state} setState={setState} />}
+        {state.step === 9 && <StepCalculating state={state} setState={setState} />}
+        {state.step === 10 && <StepResults state={state} />}
       </motion.div>
     </AnimatePresence>
   );
@@ -417,5 +417,164 @@ function EncouragementText({ text }: { text: string }) {
     >
       ✓ {text}
     </motion.p>
+  );
+}
+
+function StepLeadGate({ state, setState }: { state: WizardState; setState: React.Dispatch<React.SetStateAction<WizardState>> }) {
+  const [emailError, setEmailError] = useState("");
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!/.+@.+\..+/.test(state.email)) {
+      setEmailError("Please enter a valid email address.");
+      return;
+    }
+    setEmailError("");
+    try {
+      localStorage.setItem(
+        "elevate_audit_lead",
+        JSON.stringify({ name: state.name, email: state.email, answers: state.answers, timestamp: Date.now() })
+      );
+    } catch {}
+    if (typeof (window as any).gtag === "function") {
+      (window as any).gtag("event", "audit_lead_captured", { name: state.name, email: state.email });
+    }
+    setState((s) => ({ ...s, step: 9 }));
+  }
+
+  return (
+    <div className="max-w-md mx-auto text-center py-4">
+      <h2 className="text-2xl font-bold text-white mb-2">You're 30 seconds away from your results.</h2>
+      <p className="text-white/60 mb-8">Where should we send your personalized AI audit?</p>
+      <form onSubmit={handleSubmit} className="space-y-4 text-left">
+        <input
+          className="w-full px-4 py-3 rounded-lg bg-white/10 text-white placeholder-white/40 border border-white/20 focus:outline-none focus:border-blue-400"
+          placeholder="First Name"
+          required
+          value={state.name}
+          onChange={(e) => setState((s) => ({ ...s, name: e.target.value }))}
+        />
+        <div>
+          <input
+            className="w-full px-4 py-3 rounded-lg bg-white/10 text-white placeholder-white/40 border border-white/20 focus:outline-none focus:border-blue-400"
+            placeholder="Work Email"
+            type="email"
+            required
+            value={state.email}
+            onChange={(e) => setState((s) => ({ ...s, email: e.target.value }))}
+          />
+          {emailError && <p className="text-red-400 text-xs mt-1">{emailError}</p>}
+        </div>
+        <Button type="submit" className="w-full">
+          Show Me My Audit
+        </Button>
+        <p className="text-center text-white/30 text-xs">No spam. We'll also send you a copy of your results.</p>
+      </form>
+    </div>
+  );
+}
+
+const CALC_TEXTS = [
+  "Analyzing your business...",
+  "Identifying opportunities...",
+  "Calculating your ROI...",
+];
+
+function StepCalculating({ state, setState }: { state: WizardState; setState: React.Dispatch<React.SetStateAction<WizardState>> }) {
+  const [textIndex, setTextIndex] = useState(0);
+  const [visible, setVisible] = useState(true);
+
+  useEffect(() => {
+    const sequence: Array<{ at: number; action: () => void }> = [
+      { at: 400, action: () => setVisible(false) },
+      { at: 500, action: () => { setTextIndex(1); setVisible(true); } },
+      { at: 900, action: () => setVisible(false) },
+      { at: 1000, action: () => { setTextIndex(2); setVisible(true); } },
+      {
+        at: 1500,
+        action: () => {
+          const result = runAuditEngine(state.answers as Answers);
+          setState((s) => ({ ...s, auditResult: result, step: 10 }));
+        },
+      },
+    ];
+
+    const timers = sequence.map(({ at, action }) => setTimeout(action, at));
+    return () => timers.forEach(clearTimeout);
+  }, []); // intentionally runs once on mount
+
+  return (
+    <div className="flex flex-col items-center justify-center py-16 gap-6">
+      <AuditOrb size={64} state="calculating" approveCount={0} />
+      <AnimatePresence mode="wait">
+        {visible && (
+          <motion.p
+            key={textIndex}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.1 }}
+            className="text-white/80 text-lg font-medium"
+          >
+            {CALC_TEXTS[textIndex]}
+          </motion.p>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+const SERVICE_ICONS: Record<ServiceKey, React.ReactNode> = {
+  voice: <Phone className="h-5 w-5" />,
+  chat: <MessageSquare className="h-5 w-5" />,
+  landing: <Globe className="h-5 w-5" />,
+  automation: <Zap className="h-5 w-5" />,
+};
+
+const SERVICE_NAMES: Record<ServiceKey, string> = {
+  voice: "AI Voice Agent",
+  chat: "AI Chat Agent",
+  landing: "AI Powered Landing Page",
+  automation: "Custom Automation",
+};
+
+function StepResults({ state }: { state: WizardState }) {
+  const { auditResult, name } = state;
+  if (!auditResult) return null;
+
+  return (
+    <div className="pb-8">
+      <h2 className="text-2xl font-bold text-white mb-6">
+        Here's your AI opportunity snapshot, {name}
+      </h2>
+
+      <div className="space-y-4">
+        {auditResult.recommendations.map((rec) => (
+          <div key={rec.service} className="bg-white/5 border border-white/10 rounded-xl p-5">
+            <div className="flex items-center gap-3 mb-3">
+              <span className="text-blue-400">{SERVICE_ICONS[rec.service]}</span>
+              <span className="text-white font-semibold">{SERVICE_NAMES[rec.service]}</span>
+            </div>
+            <p className="text-white/60 text-sm mb-3">{rec.insight}</p>
+            <p className="text-emerald-400 font-bold text-lg">{rec.label}</p>
+            <p className="text-white/40 text-xs mt-1">{rec.description}</p>
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-6 p-5 bg-blue-600/20 border border-blue-500/30 rounded-xl">
+        <p className="text-white/60 text-sm mb-1">Total estimated monthly opportunity:</p>
+        <p className="text-white font-bold text-2xl">
+          ${auditResult.totalMin.toLocaleString()} – ${auditResult.totalMax.toLocaleString()}
+        </p>
+      </div>
+
+      <div className="my-8 border-t border-white/10" />
+      <h3 className="text-xl font-bold text-white mb-2">Want us to build this for you?</h3>
+      <p className="text-white/60 text-sm mb-6">
+        Book a free 30-min strategy call. We'll walk through your audit live and show you exactly what we'd build.
+      </p>
+      <AuditBookingWidget />
+    </div>
   );
 }
