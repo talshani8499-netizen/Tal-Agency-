@@ -205,7 +205,7 @@ export function runAuditEngine(answers: Answers): AuditResult {
     (a, b) => scores[b] - scores[a]
   );
   const nonQualifying = SERVICE_PRIORITY.filter((s) => scores[s] < 2).sort(
-    (a, b) => scores[b] - scores[a]
+    (a, b) => scores[b] - scores[a] || SERVICE_PRIORITY.indexOf(a) - SERVICE_PRIORITY.indexOf(b)
   );
 
   let selected = qualifying.slice(0, 4);
