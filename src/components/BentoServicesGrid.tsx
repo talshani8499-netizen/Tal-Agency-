@@ -20,7 +20,7 @@ function SEOBackground() {
   return (
     <Marquee
       pauseOnHover
-      className="absolute top-10 [mask-image:linear-gradient(to_top,transparent_40%,#000_100%)] [--duration:30s]"
+      className="absolute top-6 [mask-image:linear-gradient(to_top,transparent_40%,#000_100%)] [--duration:30s]"
     >
       {seoSnippets.map((s, i) => (
         <figure
@@ -76,7 +76,7 @@ function ChatBackground() {
     <Marquee
       vertical
       pauseOnHover
-      className="absolute top-4 right-2 h-[300px] w-[calc(100%-1rem)] [mask-image:linear-gradient(to_top,transparent_10%,#000_100%)] [--duration:20s]"
+      className="absolute top-4 right-2 h-[160px] w-[calc(100%-1rem)] [mask-image:linear-gradient(to_top,transparent_10%,#000_100%)] [--duration:20s]"
     >
       {chatBubbles.map((b, i) => (
         <div key={i} className="flex flex-col gap-1.5 px-1">
