@@ -6,8 +6,9 @@ import { BookingSection } from "@/components/BookingSection";
 import { FounderImage } from "@/components/FounderImage";
 import { services } from "@/data/services";
 import { motion } from "motion/react";
-import { PhoneCall, MessageSquare, LayoutTemplate, Workflow, ArrowRight, CheckCircle2, Clock, DollarSign, Users, Phone, Hammer, Flame, Wrench } from "lucide-react";
+import { PhoneCall, MessageSquare, LayoutTemplate, Workflow, ArrowRight, CheckCircle2, Hammer, Flame, Wrench } from "lucide-react";
 import { TradeToggle } from "@/components/ui/TradeToggle";
+import { ComparisonTable } from "@/components/ui/ComparisonTable";
 import { trackCTAClick, trackServiceInterest, useTrackSectionView } from "@/lib/analytics";
 import { HeroSection } from "@/components/ui/HeroSection";
 
@@ -138,7 +139,7 @@ export default function Home() {
                 />
                 <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2 shadow-md border border-slate-100">
                   <p className="text-xs font-bold text-slate-900">Tal Shani</p>
-                  <p className="text-xs text-blue-600 font-semibold">Founder & CEO</p>
+                  <p className="text-xs text-blue-600 font-semibold">Built the AI systems. Chose contractors.</p>
                 </div>
               </div>
             </div>
@@ -146,19 +147,19 @@ export default function Home() {
             {/* Content column */}
             <div className="flex-1">
               <span className="inline-block mb-5 text-xs font-bold tracking-[0.08em] text-blue-600 uppercase bg-blue-50 px-3 py-1 rounded-full border border-blue-100">
-                Who You're Working With
+                Why I Built This
               </span>
               <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6 leading-tight">
-                You Work Directly With the<br className="hidden md:block" /> Person Who Builds Your System.
+                Why I Built This for Contractors
               </h2>
               <blockquote className="text-lg text-slate-700 leading-relaxed mb-5 border-l-4 border-blue-500 pl-5">
-                "I started Elevate Digital because small business owners deserve the same AI advantage that billion-dollar companies have — without the enterprise price tag or complexity."
+                "I spent 6 years building AI systems for enterprise — Unit 8200, fintech, e-commerce at scale. Then I talked to a roofer who missed a $13K job because he was on a roof when the phone rang. That's when I knew where this technology needed to go."
               </blockquote>
               <p className="text-slate-500 leading-relaxed mb-8">
-                Every system is built hands-on and founder-led, obsessively focused on one metric: your ROI. No account managers, no hand-offs, no bloated retainers — just results.
+                In the time it takes to finish a 6-hour job, your AI handles 40+ calls, 12 follow-ups, and 3 booking confirmations. That's the system I built for you.
               </p>
               <div className="flex flex-wrap gap-6 mb-8 text-sm font-semibold text-slate-600">
-                {["5+ Years in AI Automation", "100% US Small Business Focus", "Founder-Led, Always"].map((t) => (
+                {["5+ Years in AI Automation", "Unit 8200 Engineering", "Built for Contractors"].map((t) => (
                   <span key={t} className="flex items-center gap-2">
                     <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" />
                     {t}
@@ -178,122 +179,33 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Two Business Owners Comparison */}
+      {/* Comparison: Mike vs Marcus */}
       <section ref={comparisonRef as React.RefObject<HTMLElement>} className="py-24 bg-slate-50">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-
-          {/* Heading */}
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">The Real Cost of Waiting</p>
-            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 leading-tight mb-4">
-              He didn't get more clients.<br />He just stopped<br />losing the ones he had.
+            <span className="badge badge-blue mb-4">The Real Cost of Waiting</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-ink-950 tracking-tight mb-4">
+              Two Contractors. Same Market. Very Different Results.
             </h2>
-            <p className="text-slate-500 text-lg max-w-lg mx-auto">
-              Two business owners. Same market. One recognized the gap — and acted.
-            </p>
           </div>
 
-          {/* Split cards */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 rounded-3xl overflow-hidden shadow-xl ring-1 ring-slate-200 mb-6">
+          <ComparisonTable
+            rows={[
+              { label: "Missed Calls", before: "3+ per day", after: "AI handles 100%" },
+              { label: "Follow-up Time", before: "Manual, whenever you remember", after: "Automated within 5 min" },
+              { label: "Review Management", before: "No system", after: "Auto-request after every job" },
+              { label: "Booking Rate", before: "50%", after: "85%" },
+              { label: "Weekend Hours Worked", before: "16 hrs", after: "8 hrs" },
+            ]}
+            leftLabel="Mike — Without Elevate"
+            rightLabel="Marcus — With Elevate"
+          />
 
-            {/* Mike — full-photo cinematic card */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.6 }}
-              className="relative min-h-[600px] flex flex-col overflow-hidden"
-            >
-              <img
-                src="/images/persona-mike.jpg"
-                alt="Stressed business owner — without AI"
-                className="absolute inset-0 w-full h-full object-cover object-center"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-gradient-to-b from-slate-950/50 via-slate-900/60 to-slate-950" />
-              <div className="relative z-10 flex flex-col h-full p-8 pb-10 min-h-[600px]">
-                <span className="self-start text-[10px] font-bold uppercase tracking-widest bg-red-900/80 text-red-300 border border-red-700/50 px-3 py-1 rounded-full backdrop-blur-sm">
-                  Without Elevate Digital
-                </span>
-                <div className="mt-auto mb-6">
-                  <p className="text-2xl font-bold text-white">Mike</p>
-                  <p className="text-slate-400 text-sm">Home services · doing it the old way</p>
-                </div>
-                <div className="mb-7">
-                  <p className="text-5xl lg:text-6xl font-extrabold text-red-400 leading-none">-$7,200</p>
-                  <p className="text-red-400/70 text-xs font-semibold uppercase tracking-widest mt-2">estimated monthly revenue leak</p>
-                </div>
-                <div className="space-y-3 mb-8">
-                  {[
-                    { Icon: Phone, num: "3 missed calls", label: "daily — gone to a competitor while you're on a job" },
-                    { Icon: Clock, num: "22 hrs/week", label: "wasted on scheduling, follow-ups, and manual admin" },
-                    { Icon: DollarSign, num: "$800 → 2 jobs", label: "78% of ad clicks left without ever calling" },
-                    { Icon: Users, num: "$3,400/mo salesperson", label: "10 cold calls a day — 1 close in 6 weeks" },
-                  ].map(({ Icon, num, label }, i) => (
-                    <div key={i} className="flex items-center gap-3">
-                      <Icon className="h-4 w-4 text-red-400/60 shrink-0" />
-                      <span className="text-sm font-bold text-white">{num}</span>
-                      <span className="text-xs text-slate-500">{label}</span>
-                    </div>
-                  ))}
-                </div>
-                <p className="text-sm italic text-slate-500 border-t border-slate-800 pt-5">
-                  "If I stop, the whole thing stops with me."
-                </p>
-              </div>
-            </motion.div>
-
-            {/* Marcus — photo-to-white card */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.6 }}
-              className="bg-white flex flex-col min-h-[600px]"
-            >
-              <div className="relative h-72 overflow-hidden shrink-0">
-                <img
-                  src="/images/persona-marcus.jpeg"
-                  alt="Confident business owner — with AI"
-                  className="w-full h-full object-cover object-center"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white" />
-                <span className="absolute top-4 left-4 text-[10px] font-bold uppercase tracking-widest bg-emerald-900/80 text-emerald-300 border border-emerald-700/50 px-3 py-1 rounded-full backdrop-blur-sm">
-                  With Elevate Digital
-                </span>
-                <div className="absolute bottom-4 left-6">
-                  <p className="text-xl font-bold text-slate-900">Marcus</p>
-                  <p className="text-slate-500 text-xs">Same business — AI runs the rest</p>
-                </div>
-              </div>
-              <div className="p-8 flex flex-col flex-grow">
-                <div className="mb-7">
-                  <p className="text-5xl lg:text-6xl font-extrabold text-emerald-500 leading-none">+$12,400</p>
-                  <p className="text-emerald-600/80 text-xs font-semibold uppercase tracking-widest mt-2">additional monthly revenue captured</p>
-                </div>
-                <div className="space-y-3 mb-8">
-                  {[
-                    { Icon: Phone, num: "0 missed calls", label: "AI voice agent answers every call, day or night" },
-                    { Icon: Clock, num: "18 hrs back", label: "automation runs scheduling, follow-ups, and admin" },
-                    { Icon: DollarSign, num: "$800 → 11 jobs", label: "optimized landing page · every ad dollar works 5× harder" },
-                    { Icon: Users, num: "15 new leads", label: "Elevate outbound calls — 2 weeks, $300/mo" },
-                  ].map(({ Icon, num, label }, i) => (
-                    <div key={i} className="flex items-center gap-3">
-                      <Icon className="h-4 w-4 text-emerald-500 shrink-0" />
-                      <span className="text-sm font-bold text-slate-800">{num}</span>
-                      <span className="text-xs text-slate-400">{label}</span>
-                    </div>
-                  ))}
-                </div>
-                <p className="text-sm italic text-slate-500 border-t border-slate-100 pt-5 mt-auto">
-                  "I took a long weekend. Monday morning: 9 new bookings waiting."
-                </p>
-              </div>
-            </motion.div>
-
+          <div className="text-center mt-10">
+            <Button href="/free-ai-audit" size="lg" icon className="btn-glow">
+              Get Marcus's Setup
+            </Button>
           </div>
-
         </div>
       </section>
 
