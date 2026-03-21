@@ -36,12 +36,12 @@ const faqs = [
     a: "5 business days from your onboarding call. We handle all the programming, testing, and configuration. You just show up for a 30-minute call at the start.",
   },
   {
-    q: "What does it cost?",
-    a: "Most of our clients pay $300–$600/month — typically recovered in the first 2–3 bookings. Get a custom quote on your free audit call.",
+    q: "Does it work when I'm on a job site?",
+    a: "That's exactly when it works best. Your AI handles every call while you're on the roof, under the house, or running a crew. No missed leads, no phone tag.",
   },
   {
-    q: "Can I cancel if it doesn't work out?",
-    a: "Yes. No long-term contracts. If you're not seeing results in the first 30 days, we'll refund your first month — no questions asked.",
+    q: "What happens if someone calls about an emergency?",
+    a: "The agent recognizes urgency cues and can route emergency calls to your cell, take a priority message, or follow whatever escalation rules you set.",
   },
 ];
 
@@ -205,8 +205,8 @@ export default function VoiceAgents() {
               className="lg:col-span-7 flex flex-col gap-7"
             >
               <h1 className="text-5xl md:text-6xl font-extrabold text-slate-900 leading-[1.05] tracking-tight">
-                Every Call Answered.<br />
-                Every Appointment Booked.<br />
+                Your AI Receptionist.<br />
+                Built for the Job Site.<br />
                 <span className="text-blue-600">Even at 2am.</span>
               </h1>
 
@@ -261,9 +261,9 @@ export default function VoiceAgents() {
 
                 {/* Recent call rows */}
                 {[
-                  { name: "Mike's Plumbing — New inquiry", time: "2 min ago", badge: "Booked", color: "emerald" },
-                  { name: "Dr. Kim's Dental — Appointment", time: "11 min ago", badge: "Booked", color: "emerald" },
-                  { name: "Rivera Law — Lead qualified", time: "34 min ago", badge: "Qualified", color: "blue" },
+                  { name: "Davis Roofing — New inquiry", time: "2 min ago", badge: "Booked", color: "emerald" },
+                  { name: "AC Pro HVAC — Appointment", time: "11 min ago", badge: "Booked", color: "emerald" },
+                  { name: "Peak Remodeling — Lead qualified", time: "34 min ago", badge: "Qualified", color: "blue" },
                 ].map((row) => (
                   <div key={row.name} className="px-5 py-3.5 flex items-center justify-between border-b border-slate-100">
                     <div className="flex items-center gap-3">
@@ -400,10 +400,11 @@ export default function VoiceAgents() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4">
-              You're losing jobs to voicemail.
+              27% of contractor calls go to voicemail.<br className="hidden sm:block" />
+              That's $50K/year walking out the door.
             </h2>
             <p className="text-xl text-slate-500 max-w-xl mx-auto">
-              Every missed call is a lead that called your competitor next.
+              Every missed call is a homeowner who called the next contractor on Google.
             </p>
           </div>
 
@@ -422,24 +423,24 @@ export default function VoiceAgents() {
             <div className="px-7 py-6 space-y-5">
               {[
                 {
-                  pain: "Phone rings at 6pm while you're wrapping up a job.",
-                  result: "Caller hung up. Called the next plumber on Google.",
+                  pain: "Phone rings while you're on the roof — you can't answer.",
+                  result: "Homeowner hung up. Called the next roofer on Google.",
                 },
                 {
-                  pain: "Customer wants to reschedule — plays phone tag for 3 days.",
+                  pain: "Customer wants to reschedule an estimate — plays phone tag for 3 days.",
                   result: "They gave up. Left a 3-star review about 'hard to reach.'",
                 },
                 {
-                  pain: "You're paying $18/hr to answer phones and take messages.",
+                  pain: "You're paying $18/hr for someone to answer phones and take messages.",
                   result: "Half those messages never turn into booked jobs.",
                 },
                 {
                   pain: "You come in Monday to 7 missed calls from the weekend.",
-                  result: "All 7 called someone else. That's $2,000+ you never saw.",
+                  result: "All 7 called someone else. That's a $90K roof you never saw.",
                 },
                 {
                   pain: "You're the only one who knows how to handle new inquiries.",
-                  result: "The business stops when you stop answering.",
+                  result: "The business stops growing when you stop answering.",
                 },
               ].map((item) => (
                 <div key={item.pain}>
@@ -451,7 +452,7 @@ export default function VoiceAgents() {
 
             <div className="bg-slate-50 border-t border-slate-100 px-7 py-5">
               <p className="text-slate-400 italic text-sm">
-                "If I'm on a job, calls go to voicemail. Half never call back." — A contractor we spoke to before building this
+                "If I'm on a job, calls go to voicemail. Half never call back." — A roofing contractor we spoke to before building this
               </p>
             </div>
           </motion.div>
