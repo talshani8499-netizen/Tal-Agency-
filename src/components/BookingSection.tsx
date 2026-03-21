@@ -76,14 +76,14 @@ export function BookingSection() {
         {/* Heading */}
         <div className="text-center mb-10">
           <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">
-            Book a Call
+            Free 30-Min Contractor Audit
           </p>
           <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4 leading-tight">
-            Your business has a next level.<br />
-            <span className="text-blue-600">Let's map out how to reach it.</span>
+            Find Out Exactly How Many Calls You're Losing Every Week.<br />
+            <span className="text-blue-600">And What They're Worth.</span>
           </h2>
           <p className="text-lg text-slate-500 max-w-xl mx-auto">
-            Free 30-min strategy call. No commitment, no pressure — just a clear picture of what AI can do for your business.
+            Free 30-min strategy call. We'll pull your call data, identify your missed-call window, and show you the exact revenue leaking through the cracks. No fluff. No pitch.
           </p>
         </div>
 

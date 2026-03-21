@@ -3,7 +3,7 @@ export const services = [
     id: "voice-agents",
     title: "AI Voice Agents",
     slug: "voice-agents",
-    shortDescription: "Never miss another call. 24/7 intelligent voice agents that book appointments and qualify leads.",
+    shortDescription: "Never miss a $13K job because your phone was busy on a job site. 24/7 AI voice agents built for contractors.",
     description: "Automate customer support, appointment booking, and lead qualification, giving your team more time for high-value tasks.",
     icon: "PhoneCall",
     benefits: [
@@ -18,7 +18,7 @@ export const services = [
       "Appointments are booked directly into your Google Calendar, Calendly, or scheduling tool. No double-bookings, no back-and-forth.",
       "Each caller is scored and categorized before your team ever picks up the phone. Only qualified, high-intent leads reach your inbox."
     ],
-    useCases: ["Home Services", "Real Estate", "Healthcare Clinics", "Law Firms"],
+    useCases: ["Roofing", "HVAC", "Remodelers", "General Contractors"],
     process: [
       { step: 1, title: "Discovery & Scripting", description: "We map out your ideal call flow and train the AI on your business knowledge." },
       { step: 2, title: "Integration & Testing", description: "We connect the agent to your CRM and calendar, running rigorous test calls." },
@@ -29,7 +29,7 @@ export const services = [
     id: "chat-agents",
     title: "AI Chat Agents",
     slug: "chat-agents",
-    shortDescription: "Turn website visitors into qualified leads instantly with intelligent, context-aware chat.",
+    shortDescription: "Turn every website visitor into a booked estimate. AI chat that knows your services, pricing, and availability.",
     description: "Engage visitors the moment they land on your site. Our AI chat agents answer complex questions, capture contact info, and route hot leads directly to your sales team.",
     icon: "MessageSquare",
     benefits: [
@@ -44,7 +44,7 @@ export const services = [
       "Qualified leads are pushed directly into your CRM with full conversation context. Your sales team picks up where the AI left off, fully informed.",
       "Your chat agent knows your pricing, services, hours, and policies inside-out. No generic bot responses — just accurate, helpful answers."
     ],
-    useCases: ["E-commerce", "SaaS", "B2B Services", "Education"],
+    useCases: ["Roofing", "HVAC", "Remodelers", "General Contractors"],
     process: [
       { step: 1, title: "Knowledge Base Ingestion", description: "We feed your website, PDFs, and past support tickets into the AI's brain." },
       { step: 2, title: "Personality Tuning", description: "We adjust the tone and style to perfectly match your brand voice." },
@@ -53,9 +53,9 @@ export const services = [
   },
   {
     id: "landing-pages",
-    title: "AI-Powered Landing Pages",
+    title: "Contractor Websites",
     slug: "landing-pages",
-    shortDescription: "High-converting landing pages dynamically optimized for your specific ad campaigns.",
+    shortDescription: "High-converting contractor pages that turn ad clicks into booked jobs — not bounced visitors.",
     description: "Stop sending expensive ad traffic to a generic homepage. We build hyper-focused landing pages that use AI to personalize copy and maximize conversion rates.",
     icon: "LayoutTemplate",
     benefits: [
@@ -70,7 +70,7 @@ export const services = [
       "Pages load in under 2 seconds on any device. Slow pages kill conversions — ours don't.",
       "Smart forms that adapt based on visitor behavior. Fewer fields for cold traffic, deeper qualification for warm leads."
     ],
-    useCases: ["Paid Ad Campaigns", "Lead Magnet Funnels", "Event Registrations", "Product Launches"],
+    useCases: ["Trade-Specific Landing Pages", "Lead Capture", "SEO"],
     process: [
       { step: 1, title: "Audience Analysis", description: "We analyze your target demographic and the specific intent behind their clicks." },
       { step: 2, title: "Design & Copywriting", description: "We craft compelling, conversion-focused layouts and persuasive copy." },
@@ -81,7 +81,7 @@ export const services = [
     id: "custom-automation",
     title: "Custom AI Automation",
     slug: "custom-automation",
-    shortDescription: "Bespoke workflows connecting your favorite tools to eliminate repetitive manual tasks.",
+    shortDescription: "Eliminate the admin that eats your evenings. Automated follow-ups, CRM sync, and review requests.",
     description: "If you find yourself copying and pasting data between apps, you need custom automation. We build seamless bridges between your software stack to save you hours every week.",
     icon: "Workflow",
     benefits: [
@@ -96,7 +96,7 @@ export const services = [
       "Even if your tools are outdated, we build custom bridges using APIs, webhooks, and middleware to make everything talk to each other.",
       "One event can cascade across your entire stack — a new lead triggers a CRM entry, welcome email, Slack notification, and task assignment simultaneously."
     ],
-    useCases: ["Invoice Processing", "Employee Onboarding", "Inventory Syncing", "Complex Data Entry"],
+    useCases: ["CRM Sync", "Follow-up Sequences", "Review Automation", "Estimate Workflows"],
     process: [
       { step: 1, title: "Process Auditing", description: "We shadow your team to identify the most time-consuming manual bottlenecks." },
       { step: 2, title: "Architecture Design", description: "We map out the data flow and select the right integration tools (Zapier, Make, custom APIs)." },

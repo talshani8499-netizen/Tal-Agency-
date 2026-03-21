@@ -15,6 +15,10 @@ import { EbookLanding, AuditLanding, VoiceDemoLanding } from "./pages/LeadMagnet
 import ChatAgents from "./pages/ChatAgents";
 import LandingPages from "./pages/LandingPages";
 import CustomAutomation from "./pages/CustomAutomation";
+import Roofing from "./pages/Roofing";
+import HVAC from "./pages/HVAC";
+import Remodeling from "./pages/Remodeling";
+import HowItWorks from "./pages/HowItWorks";
 
 function NotFound() {
   return (
@@ -48,6 +52,10 @@ export default function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
+          <Route path="/roofing" element={<Roofing />} />
+          <Route path="/hvac" element={<HVAC />} />
+          <Route path="/remodeling" element={<Remodeling />} />
+          <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="*" element={<NotFound />} />
         </Route>
 

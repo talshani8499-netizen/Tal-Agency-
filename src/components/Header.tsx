@@ -3,7 +3,6 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "./ui/Button";
 import { cn } from "@/lib/utils";
-import { services } from "@/data/services";
 import { motion, AnimatePresence } from "motion/react";
 
 export function Header() {
@@ -27,11 +26,10 @@ export function Header() {
 
   const navLinks = [
     { name: "Home", href: "/" },
-    { name: "Client Cases", href: "/case-studies" },
+    { name: "Pricing", href: "/pricing" },
+    { name: "Case Studies", href: "/case-studies" },
     { name: "About", href: "/about" },
     { name: "Blog", href: "/blog" },
-    { name: "Pricing", href: "/pricing" },
-    { name: "Contact", href: "/contact" },
   ];
 
   return (
@@ -44,7 +42,7 @@ export function Header() {
               <div style={{ overflow: "hidden", height: "48px", width: "70px" }}>
                 <img
                   src="/images/Potential Logo.jpeg"
-                  alt="Elevate Digital"
+                  alt="Elevate Digital — Built for Contractors"
                   style={{ width: "70px", marginTop: "-24px", display: "block", mixBlendMode: "multiply", filter: "brightness(1.06)" }}
                 />
               </div>
@@ -75,7 +73,7 @@ export function Header() {
                     if (e.key === "Escape") setServicesDropdownOpen(false);
                   }}
                 >
-                  Services <ChevronDown className={cn("h-4 w-4 transition-transform duration-200", servicesDropdownOpen && "rotate-180")} aria-hidden="true" />
+                  Trades <ChevronDown className={cn("h-4 w-4 transition-transform duration-200", servicesDropdownOpen && "rotate-180")} aria-hidden="true" />
                 </button>
 
                 <AnimatePresence>
@@ -87,13 +85,18 @@ export function Header() {
                       transition={{ duration: 0.15 }}
                       className="absolute top-full left-1/2 -translate-x-1/2 w-64 bg-white border border-slate-200 rounded-xl shadow-lg p-2 origin-top mt-1"
                     >
-                      {services.map((service) => (
+                      {[
+                        { label: "Roofers", href: "/roofing" },
+                        { label: "HVAC", href: "/hvac" },
+                        { label: "Remodelers", href: "/remodeling" },
+                        { label: "All Services", href: "/services" },
+                      ].map((item) => (
                         <Link
-                          key={service.id}
-                          to={`/services/${service.slug}`}
+                          key={item.href}
+                          to={item.href}
                           className="block px-4 py-2 text-sm text-slate-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
                         >
-                          {service.title}
+                          {item.label}
                         </Link>
                       ))}
                     </motion.div>
@@ -115,7 +118,7 @@ export function Header() {
             {/* CTA Button */}
             <div className="hidden md:flex items-center gap-3">
               <Button href="/contact" size="sm">
-                Book a Free Strategy Call
+                See How Many Calls You're Missing
               </Button>
             </div>
 
@@ -145,15 +148,20 @@ export function Header() {
             <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-1">
               <Link to="/" className="text-base font-medium text-slate-900 px-4 py-3 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors">Home</Link>
               <div className="flex flex-col">
-                <p className="text-xs font-bold text-slate-400 uppercase tracking-widest px-4 pt-2 pb-1">Services</p>
+                <p className="text-xs font-bold text-slate-400 uppercase tracking-widest px-4 pt-2 pb-1">Trades</p>
                 <div className="pl-4 flex flex-col border-l-2 border-blue-100 ml-6 mt-1">
-                  {services.map((service) => (
+                  {[
+                    { label: "Roofers", href: "/roofing" },
+                    { label: "HVAC", href: "/hvac" },
+                    { label: "Remodelers", href: "/remodeling" },
+                    { label: "All Services", href: "/services" },
+                  ].map((item) => (
                     <Link
-                      key={service.id}
-                      to={`/services/${service.slug}`}
+                      key={item.href}
+                      to={item.href}
                       className="text-sm text-slate-600 px-4 py-2.5 hover:text-blue-600 transition-colors"
                     >
-                      {service.title}
+                      {item.label}
                     </Link>
                   ))}
                 </div>
@@ -169,7 +177,7 @@ export function Header() {
               ))}
               <div className="pt-3 mt-1 border-t border-slate-100">
                 <Button href="/contact" className="w-full justify-center">
-                  Book a Free Strategy Call
+                  See How Many Calls You're Missing
                 </Button>
               </div>
             </div>

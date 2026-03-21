@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { services } from "@/data/services";
 
 export function Footer() {
   return (
@@ -18,7 +17,7 @@ export function Footer() {
               </div>
             </Link>
             <p className="text-sm text-slate-400 mb-6 max-w-xs">
-              Helping US small businesses capture more leads, save time, and grow revenue with intelligent AI automation.
+              Built for contractors. We handle the calls. You handle the build.
             </p>
           </div>
 
@@ -34,17 +33,14 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Services */}
+          {/* Trades */}
           <div>
-            <h3 className="text-white font-semibold mb-6">Services</h3>
+            <h3 className="text-white font-semibold mb-6">Trades</h3>
             <ul className="space-y-4 text-sm">
-              {services.map((service) => (
-                <li key={service.id}>
-                  <Link to={`/services/${service.slug}`} className="hover:text-blue-400 transition-colors">
-                    {service.title}
-                  </Link>
-                </li>
-              ))}
+              <li><Link to="/roofing" className="hover:text-blue-400 transition-colors">Roofers</Link></li>
+              <li><Link to="/hvac" className="hover:text-blue-400 transition-colors">HVAC</Link></li>
+              <li><Link to="/remodeling" className="hover:text-blue-400 transition-colors">Remodelers</Link></li>
+              <li><Link to="/how-it-works" className="hover:text-blue-400 transition-colors">How It Works</Link></li>
             </ul>
           </div>
 
@@ -60,7 +56,7 @@ export function Footer() {
 
         <div className="pt-8 border-t border-slate-800 text-sm text-slate-500 flex flex-col md:flex-row justify-between items-center">
           <p>&copy; {new Date().getFullYear()} Elevate Digital. All rights reserved.</p>
-          <p className="mt-2 md:mt-0">AI Automation for US Small Businesses.</p>
+          <p className="mt-2 md:mt-0">AI-Powered Contractor Infrastructure.</p>
         </div>
       </div>
     </footer>
