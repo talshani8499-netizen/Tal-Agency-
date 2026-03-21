@@ -7,7 +7,6 @@ const cloudProps: Omit<ICloud, "children"> = {
     wheelZoom: false,
     imageScale: 2,
     activeCursor: "default",
-    tooltip: "none",
     initial: [0.1, -0.1],
     clickToFront: 500,
     tooltipDelay: 0,
