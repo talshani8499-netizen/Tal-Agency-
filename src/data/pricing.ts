@@ -1,59 +1,59 @@
 export const pricingTiers = [
   {
-    id: "essentials",
-    name: "AI Essentials",
+    id: "starter-crew",
+    name: "Starter Crew",
     subtitle: "The Foundation",
-    targetAudience: "SMBs new to AI, seeking to address a single primary pain point (e.g., missed calls or basic lead capture).",
+    targetAudience: "For new contractors just getting the phone ringing.",
     setupFee: "$1,000",
-    monthlyFee: "$200",
+    monthlyFee: "$300",
     popular: false,
     features: [
-      "1 AI Chatbot OR 1 AI Voice Agent",
-      "Standard Lead Capture & Qualification",
-      "CRM Integration (e.g., Monday.com, HubSpot)",
-      "Monthly Performance Report"
+      "AI Voice Agent — answers every call, even on the roof",
+      "Lead capture & qualification",
+      "CRM integration (Monday, HubSpot)",
+      "Monthly performance report",
     ],
-    ctaText: "Choose Essentials",
-    ctaLink: "/contact?plan=essentials"
+    ctaText: "Choose Starter Crew",
+    ctaLink: "/contact?plan=starter-crew",
   },
   {
-    id: "growth",
-    name: "AI Growth",
+    id: "full-crew",
+    name: "Full Crew",
     subtitle: "The Accelerator",
-    targetAudience: "Businesses ready for deeper AI integration across multiple touchpoints in sales and service processes.",
+    targetAudience: "For established shops ready to run on autopilot.",
     setupFee: "$2,500",
-    monthlyFee: "$500",
+    monthlyFee: "$600",
     popular: true,
     features: [
-      "AI Chatbot AND AI Voice Agent",
-      "Advanced Lead Routing & Appointment Booking",
-      "Direct CRM Integration (e.g., HubSpot, Salesforce)",
-      "Custom Automation (e.g., WhatsApp, SMS, Email)",
-      "AI-Powered Landing Page (1)",
-      "Bi-Weekly Performance & Strategy Calls"
+      "AI Voice Agent + Chat Agent",
+      "Automated follow-ups (SMS, email, WhatsApp)",
+      "Direct CRM integration (HubSpot, Salesforce)",
+      "Review request automation after every job",
+      "Contractor landing page (1)",
+      "Bi-weekly strategy calls",
     ],
-    ctaText: "Choose Growth",
-    ctaLink: "/contact?plan=growth"
+    ctaText: "Choose Full Crew",
+    ctaLink: "/contact?plan=full-crew",
   },
   {
-    id: "scale",
-    name: "AI Scale",
+    id: "general-contractor",
+    name: "General Contractor",
     subtitle: "The Custom Engine",
-    targetAudience: "Larger SMBs or those with complex, unique needs requiring bespoke workflows and extensive integrations.",
+    targetAudience: "Full digital infrastructure for scaling operations.",
     setupFee: "$10,000+",
     monthlyFee: "Custom",
     popular: false,
     features: [
-      "Includes all features from the Growth package, plus:",
-      "Custom AI Workflows (e.g., internal process automation)",
-      "Multi-Agent Systems",
-      "API & Database Integration",
-      "Dedicated Account Manager",
-      "Comprehensive CRM Integration"
+      "Everything in Full Crew, plus:",
+      "Multi-location AI call routing",
+      "Custom AI workflows & estimate automation",
+      "API & database integration",
+      "Dedicated account manager",
+      "Comprehensive CRM buildout",
     ],
-    ctaText: "Book a Custom Strategy Call",
-    ctaLink: "/contact?plan=scale"
-  }
+    ctaText: "Book a Strategy Call",
+    ctaLink: "/contact?plan=general-contractor",
+  },
 ];
 
 export const costDrivers = [
