@@ -6,8 +6,9 @@ import { BookingSection } from "@/components/BookingSection";
 import { FounderImage } from "@/components/FounderImage";
 import { services } from "@/data/services";
 import { motion } from "motion/react";
-import { PhoneCall, MessageSquare, LayoutTemplate, Workflow, ArrowRight, CheckCircle2, TrendingUp, Clock, DollarSign, Users, Globe, Phone } from "lucide-react";
+import { PhoneCall, MessageSquare, LayoutTemplate, Workflow, ArrowRight, CheckCircle2, Clock, DollarSign, Users, Phone } from "lucide-react";
 import { trackCTAClick, trackServiceInterest, useTrackSectionView } from "@/lib/analytics";
+import { HeroSection } from "@/components/ui/HeroSection";
 
 const iconMap = {
   PhoneCall,
@@ -34,140 +35,29 @@ export default function Home() {
     <div className="flex flex-col min-h-screen">
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-slate-50 via-white to-blue-50 pt-12 pb-20 lg:pt-16 lg:pb-28">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-
-            {/* Left Content */}
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              className="lg:col-span-7"
-            >
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-slate-900 mb-6 leading-[1.05] tracking-tight">
-                Stop Losing Money<br/>
-                to <span className="text-blue-600">Missed Calls</span><br/>
-                and Manual Work.
-              </h1>
-
-              <p className="text-xl text-slate-600 mb-10 max-w-xl leading-relaxed">
-                We build AI systems that capture every lead, answer every call, and eliminate busywork — 24/7, without adding to your payroll.
-              </p>
-
-              <div className="flex flex-col sm:flex-row items-start gap-4 mb-10">
-                <Button 
-                  href="/free-ai-audit" 
-                  size="lg" 
-                  icon
-                  onClick={() => trackCTAClick('Get Free AI Audit', '/free-ai-audit')}
-                >
-                  Get Your Free AI Audit
-                </Button>
-                <Button 
-                  href="/contact" 
-                  variant="ghost" 
-                  size="lg"
-                  onClick={() => trackCTAClick('Schedule a Call', '/contact')}
-                >
-                  Schedule a Call <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-              </div>
-
-              <div className="flex flex-wrap gap-x-6 gap-y-3 text-sm font-medium text-slate-600">
-                {["No Long-Term Contracts", "Done-For-You Setup", "ROI in 30 Days"].map((point) => (
-                  <div key={point} className="flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" />
-                    {point}
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Right — Dashboard Widget */}
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
-              className="lg:col-span-5 hidden lg:block"
-            >
-              {/* Business-owner ROI dashboard */}
-              <div className="bg-white rounded-2xl overflow-hidden shadow-xl border border-slate-200">
-
-                {/* Header */}
-                <div className="bg-slate-50 border-b border-slate-200 px-6 py-4 flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <TrendingUp className="h-4 w-4 text-blue-600" />
-                    <span className="text-sm font-semibold text-slate-700">AI Results · This Month</span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-                    <span className="text-xs font-semibold text-emerald-600">Live</span>
-                  </div>
-                </div>
-
-                {/* Funnel metrics — 2×2 grid */}
-                <div className="grid grid-cols-2 divide-x divide-y divide-slate-100">
-                  {[
-                    { icon: Globe,         label: "Website Visits",   value: "4,507", color: "text-blue-600",  bg: "bg-blue-50"   },
-                    { icon: Users,         label: "Leads Captured",   value: "2,896", color: "text-blue-600",  bg: "bg-blue-50"   },
-                    { icon: Phone,         label: "Calls Handled",    value: "1,896", color: "text-slate-700", bg: "bg-slate-50"  },
-                    { icon: CheckCircle2,  label: "Leads Qualified",  value: "842",   color: "text-slate-700", bg: "bg-slate-50"  },
-                  ].map(({ icon: Icon, label, value, color, bg }) => (
-                    <div key={label} className="p-5 flex flex-col gap-2">
-                      <div className={`w-8 h-8 rounded-lg ${bg} flex items-center justify-center`}>
-                        <Icon className={`h-4 w-4 ${color}`} />
-                      </div>
-                      <div className="text-2xl font-bold text-slate-900">{value}</div>
-                      <div className="text-xs text-slate-500 font-medium">{label}</div>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Hours saved — full-width row */}
-                <div className="border-t border-slate-100 px-5 py-4 flex items-center justify-between bg-amber-50/60">
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-amber-100 flex items-center justify-center">
-                      <Clock className="h-4 w-4 text-amber-600" />
-                    </div>
-                    <div>
-                      <div className="text-xs text-slate-500 font-medium">Time Saved</div>
-                      <div className="text-sm font-semibold text-slate-700">160 hrs freed up for your team</div>
-                    </div>
-                  </div>
-                  <span className="text-lg font-bold text-amber-600">160 hrs</span>
-                </div>
-
-                {/* Revenue footer */}
-                <div className="border-t border-emerald-100 bg-emerald-50 px-5 py-4">
-                  <div className="flex items-center gap-2 mb-3">
-                    <DollarSign className="h-4 w-4 text-emerald-600" />
-                    <span className="text-xs font-bold text-emerald-700 uppercase tracking-wide">Revenue Impact</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <div className="text-xs text-emerald-600 font-medium">Recovered</div>
-                      <div className="text-xl font-bold text-emerald-700">$4,200</div>
-                    </div>
-                    <div className="w-px h-10 bg-emerald-200" />
-                    <div>
-                      <div className="text-xs text-emerald-600 font-medium">Generated</div>
-                      <div className="text-xl font-bold text-emerald-700">$17,000</div>
-                    </div>
-                    <div className="w-px h-10 bg-emerald-200" />
-                    <div className="text-right">
-                      <div className="text-xs text-emerald-600 font-medium">Total</div>
-                      <div className="text-2xl font-extrabold text-emerald-700">$21,200</div>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </motion.div>
-
+      <HeroSection
+        variant="gradient"
+        overline="Built for Contractors"
+        headline={
+          <>
+            We Handle the Calls.{" "}
+            <span className="gradient-text">You Handle the Build.</span>
+          </>
+        }
+        subheadline="AI-powered call answering, follow-up, and booking — built specifically for roofing, HVAC, and remodeling contractors."
+        primaryCTA={{ label: "See How Many Calls You're Missing", href: "/free-ai-audit" }}
+        secondaryCTA={{ label: "Watch 90-sec Demo", href: "/ai-voice-demo" }}
+        trustStrip={
+          <div className="flex flex-wrap gap-x-6 gap-y-3 text-sm font-medium text-ink-500">
+            {["500+ calls handled", "27% of contractor calls go to voicemail", "$13K avg job value"].map((text) => (
+              <span key={text} className="flex items-center gap-2">
+                <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" />
+                {text}
+              </span>
+            ))}
           </div>
-        </div>
-      </section>
+        }
+      />
 
       {/* Industry Carousel */}
       {(() => {
