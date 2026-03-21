@@ -71,7 +71,7 @@ Row 3: [        Contractor Websites  lg:col-span-3              ]
 - **Name:** `"Convert Visitors Into Booked Estimates"`
 - **Description:** `"Turn every website visitor into a lead. AI chat that knows your services, pricing, and availability — 24/7."`
 - **CTA:** `"Learn more"` → `"/services/chat-agents"`
-- **Animated background:** `Marquee` (vertical direction, pauseOnHover) of chat bubble pairs:
+- **Animated background:** `Marquee` (`vertical={true}`, `pauseOnHover`) of chat bubble pairs:
   - `{ q: "How much does a new roof cost?", a: "Most installs run $8K–$18K. Want a free estimate?" }`
   - `{ q: "Can you come this weekend?", a: "Yes! I have Saturday 10am or Sunday 2pm open." }`
   - `{ q: "Do you handle insurance claims?", a: "Absolutely — we work with all major insurers." }`
@@ -90,6 +90,18 @@ Row 3: [        Contractor Websites  lg:col-span-3              ]
   - **Output nodes (right column):** Salesforce, WhatsApp
   - Beam color: blue (`#3b82f6`)
   - Mask: `linear-gradient(to top, transparent 10%, #000 100%)`
+  - **Ref wiring (7 refs total):**
+    - `containerRef` — the wrapping `div` of the background sub-component
+    - `centerRef` — the central AI node element
+    - `hubspotRef`, `twilioRef`, `gmailRef` — the three left-column input nodes
+    - `salesforceRef`, `whatsappRef` — the two right-column output nodes
+  - **Beam directions:**
+    - `hubspotRef → centerRef` (input)
+    - `twilioRef → centerRef` (input)
+    - `gmailRef → centerRef` (input)
+    - `centerRef → salesforceRef` (output, use `reverse` prop if supported, otherwise swap fromRef/toRef)
+    - `centerRef → whatsappRef` (output, same as above)
+  - All `AnimatedBeam` instances share the same `containerRef`
 
 ### Card 5 — Contractor Websites
 - **Position:** Row 3, col-span-3 (full width)
@@ -98,7 +110,7 @@ Row 3: [        Contractor Websites  lg:col-span-3              ]
 - **Description:** `"Stop sending ad traffic to a generic homepage. Trade-specific pages that turn clicks into booked estimates."`
 - **CTA:** `"Learn more"` → `"/services/landing-pages"`
 - **Animated background:** `Calendar` component (shadcn/ui) with a pre-selected date, scaled and positioned top-right:
-  - `selected={new Date(2026, 2, 21)}`
+  - Props: `mode="single"`, `selected={new Date(2026, 2, 21)}`, `onSelect={() => {}}` (no-op, display only)
   - `className="absolute top-10 right-0 origin-top scale-75 rounded-md border [mask-image:linear-gradient(to_top,transparent_40%,#000_100%)] transition-all duration-300 ease-out group-hover:scale-90"`
 
 ---
@@ -141,7 +153,7 @@ npx magicui-cli add animated-beam
 
 If the CLI prompts for a components directory, use `src/components/magicui`.
 If `@radix-ui/react-icons` is required by any installed component, install it: `npm install @radix-ui/react-icons`.
-The `Calendar` component is sourced from `@/components/ui/calendar` — if it doesn't exist, install via `npx shadcn-ui@latest add calendar`.
+The `Calendar` component is sourced from `@/components/ui/calendar` — if it doesn't exist, install via `npx shadcn@latest add calendar`.
 
 ---
 
