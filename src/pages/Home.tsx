@@ -6,7 +6,8 @@ import { BookingSection } from "@/components/BookingSection";
 import { FounderImage } from "@/components/FounderImage";
 import { services } from "@/data/services";
 import { motion } from "motion/react";
-import { PhoneCall, MessageSquare, LayoutTemplate, Workflow, ArrowRight, CheckCircle2, Clock, DollarSign, Users, Phone } from "lucide-react";
+import { PhoneCall, MessageSquare, LayoutTemplate, Workflow, ArrowRight, CheckCircle2, Clock, DollarSign, Users, Phone, Hammer, Flame, Wrench } from "lucide-react";
+import { TradeToggle } from "@/components/ui/TradeToggle";
 import { trackCTAClick, trackServiceInterest, useTrackSectionView } from "@/lib/analytics";
 import { HeroSection } from "@/components/ui/HeroSection";
 
@@ -59,77 +60,63 @@ export default function Home() {
         }
       />
 
-      {/* Industry Carousel */}
-      {(() => {
-        const industries = [
-          {
-            label: "Home Services",
-            photo: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=420&h=280&fit=crop&auto=format&q=80",
-          },
-          {
-            label: "Law Firms",
-            photo: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=420&h=280&fit=crop&auto=format&q=80",
-          },
-          {
-            label: "Dental & Medical",
-            photo: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=420&h=280&fit=crop&auto=format&q=80",
-          },
-          {
-            label: "Real Estate",
-            photo: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=420&h=280&fit=crop&auto=format&q=80",
-          },
-          {
-            label: "E-commerce",
-            photo: "https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=420&h=280&fit=crop&auto=format&q=80",
-          },
-          {
-            label: "Contractors",
-            photo: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=420&h=280&fit=crop&auto=format&q=80",
-          },
-        ];
-        const cards = [...industries, ...industries]; // duplicate for seamless loop
-        return (
-          <section className="bg-white border-y border-slate-200 py-8 overflow-hidden ticker-pause">
-            <p className="text-center text-xs font-semibold text-slate-400 uppercase tracking-widest mb-6">
-              Helping businesses in
-            </p>
-            {/* fade edges */}
-            <div
-              className="relative"
-              style={{
-                maskImage: "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
-                WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
-              }}
-            >
-              <div className="flex gap-5 ticker-track" style={{ width: "max-content" }}>
-                {cards.map((item, i) => (
-                  <div
-                    key={i}
-                    className="relative w-52 h-36 rounded-xl overflow-hidden shrink-0 shadow-md"
-                    style={{ backgroundColor: "#334155" }}
-                  >
-                    <img
-                      src={item.photo}
-                      alt={item.label}
-                      className="w-full h-full object-cover"
-                      loading="lazy"
-                      onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
-                    />
-                    {/* dark gradient overlay */}
-                    <div
-                      className="absolute inset-0"
-                      style={{ background: "linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.2) 55%, transparent 100%)" }}
-                    />
-                    <span className="absolute bottom-3 left-4 text-white text-sm font-bold drop-shadow-md leading-tight">
-                      {item.label}
-                    </span>
+      {/* Trade Toggle */}
+      <section className="py-20 bg-white border-y border-ink-300">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <span className="badge badge-blue mb-4">Who We Serve</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-ink-950 tracking-tight">
+              Built for the Trades That Build America
+            </h2>
+          </div>
+          <TradeToggle
+            trades={[
+              {
+                id: "roofing", label: "Roofers", icon: Hammer,
+                content: (
+                  <div className="text-center py-8 space-y-4">
+                    <div className="flex justify-center gap-8 text-sm font-semibold text-ink-700">
+                      <span>$11,500 avg job</span>
+                      <span>62% close rate from speed-to-lead</span>
+                      <span>27% of calls missed</span>
+                    </div>
+                    <p className="text-ink-500 max-w-lg mx-auto">Your AI answers while you're on the roof. Every missed call is $11,500 walking to your competitor.</p>
+                    <Button href="/roofing" variant="ghost" size="sm">See How It Works for Roofers <ArrowRight className="ml-1.5 h-4 w-4" /></Button>
                   </div>
-                ))}
-              </div>
-            </div>
-          </section>
-        );
-      })()}
+                ),
+              },
+              {
+                id: "hvac", label: "HVAC", icon: Flame,
+                content: (
+                  <div className="text-center py-8 space-y-4">
+                    <div className="flex justify-center gap-8 text-sm font-semibold text-ink-700">
+                      <span>$13,000 avg job</span>
+                      <span>Seasonal peaks kill solo operators</span>
+                      <span>4.9-star = 37% more calls</span>
+                    </div>
+                    <p className="text-ink-500 max-w-lg mx-auto">When summer hits, your phone explodes. Your AI handles the surge so you don't lose peak-season revenue.</p>
+                    <Button href="/hvac" variant="ghost" size="sm">See How It Works for HVAC <ArrowRight className="ml-1.5 h-4 w-4" /></Button>
+                  </div>
+                ),
+              },
+              {
+                id: "remodeling", label: "Remodelers", icon: Wrench,
+                content: (
+                  <div className="text-center py-8 space-y-4">
+                    <div className="flex justify-center gap-8 text-sm font-semibold text-ink-700">
+                      <span>$28,400 avg kitchen remodel</span>
+                      <span>Trust signals close jobs</span>
+                      <span>Referrals need a system</span>
+                    </div>
+                    <p className="text-ink-500 max-w-lg mx-auto">High-ticket jobs need trust. Your AI builds it from the first call — professional, instant, and always available.</p>
+                    <Button href="/remodeling" variant="ghost" size="sm">See How It Works for Remodelers <ArrowRight className="ml-1.5 h-4 w-4" /></Button>
+                  </div>
+                ),
+              },
+            ]}
+          />
+        </div>
+      </section>
 
       {/* Founder Section */}
       <section ref={founderRef as React.RefObject<HTMLElement>} className="py-20 bg-gradient-to-br from-slate-50 to-blue-50/40 border-y border-slate-200">
