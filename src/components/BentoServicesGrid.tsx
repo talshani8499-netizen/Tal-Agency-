@@ -1,10 +1,9 @@
-import { useRef } from "react";
 import { Globe, PhoneCall, MessageSquare, Workflow, LayoutTemplate } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { BentoCard, BentoGrid } from "@/components/magicui/bento-grid";
 import { Marquee } from "@/components/magicui/marquee";
 import { AnimatedList, type AnimatedListItem } from "@/components/magicui/animated-list";
-import { AnimatedBeam } from "@/components/magicui/animated-beam";
+import { IconCloud } from "@/components/magicui/icon-cloud";
 
 // ─── SEO & GEO Background ────────────────────────────────────────────────────
 
@@ -20,7 +19,7 @@ function SEOBackground() {
   return (
     <Marquee
       pauseOnHover
-      className="absolute top-10 [mask-image:linear-gradient(to_top,transparent_40%,#000_100%)] [--duration:30s]"
+      className="absolute top-6 [mask-image:linear-gradient(to_top,transparent_40%,#000_100%)] [--duration:30s]"
     >
       {seoSnippets.map((s, i) => (
         <figure
@@ -76,7 +75,7 @@ function ChatBackground() {
     <Marquee
       vertical
       pauseOnHover
-      className="absolute top-4 right-2 h-[300px] w-[calc(100%-1rem)] [mask-image:linear-gradient(to_top,transparent_10%,#000_100%)] [--duration:20s]"
+      className="absolute top-4 right-2 h-[160px] w-[calc(100%-1rem)] [mask-image:linear-gradient(to_top,transparent_10%,#000_100%)] [--duration:20s]"
     >
       {chatBubbles.map((b, i) => (
         <div key={i} className="flex flex-col gap-1.5 px-1">
@@ -92,65 +91,43 @@ function ChatBackground() {
   );
 }
 
-// ─── Automation Background (AnimatedBeam) ────────────────────────────────────
+// ─── Automation Background (IconCloud) ───────────────────────────────────────
 
-function NodeIcon({ label, emoji, className }: { label: string; emoji: string; className?: string }) {
-  return (
-    <div
-      className={cn(
-        "z-10 flex flex-col items-center justify-center gap-1 rounded-xl border border-slate-200 bg-white p-2 shadow-sm w-16",
-        className,
-      )}
-    >
-      <span className="text-lg">{emoji}</span>
-      <span className="text-[9px] font-semibold text-slate-500 uppercase tracking-wide text-center leading-tight">{label}</span>
-    </div>
-  );
-}
+const automationSlugs = [
+  "gmail",
+  "hubspot",
+  "jira",
+  "zapier",
+  "n8n",
+  "calendly",
+  "notion",
+  "airtable",
+  "googlesheets",
+  "stripe",
+  "typeform",
+  "mailchimp",
+  "zoom",
+  "dropbox",
+  "shopify",
+  "zendesk",
+  "whatsapp",
+  "googledrive",
+  "googlecalendar",
+  "trello",
+  "asana",
+  "discord",
+  "intercom",
+  "clickup",
+];
+
+const automationImages = automationSlugs.map(
+  (slug) => `https://cdn.simpleicons.org/${slug}/${slug}`
+);
 
 function AutomationBackground() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const centerRef = useRef<HTMLDivElement>(null);
-  const hubspotRef = useRef<HTMLDivElement>(null);
-  const twilioRef = useRef<HTMLDivElement>(null);
-  const gmailRef = useRef<HTMLDivElement>(null);
-  const salesforceRef = useRef<HTMLDivElement>(null);
-  const whatsappRef = useRef<HTMLDivElement>(null);
-
   return (
-    <div
-      ref={containerRef}
-      className="absolute inset-0 flex flex-row items-center justify-between px-8 [mask-image:linear-gradient(to_top,transparent_10%,#000_100%)]"
-    >
-      {/* Left: input nodes */}
-      <div className="flex flex-col gap-4">
-        <div ref={hubspotRef}><NodeIcon label="HubSpot" emoji="🟠" /></div>
-        <div ref={twilioRef}><NodeIcon label="Twilio" emoji="🔴" /></div>
-        <div ref={gmailRef}><NodeIcon label="Gmail" emoji="📧" /></div>
-      </div>
-
-      {/* Center: AI node */}
-      <div
-        ref={centerRef}
-        className="z-10 flex h-16 w-16 flex-col items-center justify-center rounded-2xl border-2 border-blue-200 bg-blue-50 shadow-md"
-      >
-        <span className="text-2xl">🤖</span>
-        <span className="text-[9px] font-bold text-blue-600 uppercase tracking-wide mt-0.5">AI</span>
-      </div>
-
-      {/* Right: output nodes */}
-      <div className="flex flex-col gap-4">
-        <div ref={salesforceRef}><NodeIcon label="Salesforce" emoji="☁️" /></div>
-        <div ref={whatsappRef}><NodeIcon label="WhatsApp" emoji="💬" /></div>
-      </div>
-
-      {/* Beams: inputs → center */}
-      <AnimatedBeam containerRef={containerRef} fromRef={hubspotRef} toRef={centerRef} duration={3} delay={0} />
-      <AnimatedBeam containerRef={containerRef} fromRef={twilioRef} toRef={centerRef} duration={3} delay={0.5} />
-      <AnimatedBeam containerRef={containerRef} fromRef={gmailRef} toRef={centerRef} duration={3} delay={1} />
-      {/* Beams: center → outputs */}
-      <AnimatedBeam containerRef={containerRef} fromRef={centerRef} toRef={salesforceRef} duration={3} delay={1.5} reverse />
-      <AnimatedBeam containerRef={containerRef} fromRef={centerRef} toRef={whatsappRef} duration={3} delay={2} reverse />
+    <div className="absolute inset-0 [mask-image:linear-gradient(to_top,transparent_10%,#000_80%)]">
+      <IconCloud images={automationImages} />
     </div>
   );
 }
@@ -172,36 +149,39 @@ const BOOKED = new Set([5, 8, 12, 15, 19, 21, 26, 28]);
 
 function WebsitesBackground() {
   return (
-    <div className="absolute top-6 right-4 origin-top scale-[0.85] rounded-xl border border-slate-200 bg-white p-4 shadow-sm [mask-image:linear-gradient(to_top,transparent_40%,#000_100%)] transition-all duration-300 ease-out group-hover:scale-90">
-      {/* Month header */}
-      <div className="flex items-center justify-between mb-3 px-1">
-        <span className="text-xs font-bold text-slate-700">March 2026</span>
-        <div className="flex items-center gap-2 text-[10px] text-slate-400">
-          <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-emerald-400 inline-block" />Booked</span>
+    <div className="absolute inset-0 flex items-start justify-center pt-4 [mask-image:linear-gradient(to_top,transparent_15%,#000_70%)]">
+      <div className="rounded-2xl border border-slate-200 bg-white px-5 py-4 shadow-sm w-[320px]">
+        {/* Month header */}
+        <div className="flex items-center justify-between mb-3">
+          <span className="text-sm font-bold text-slate-700">March 2026</span>
+          <span className="flex items-center gap-1.5 text-[11px] text-slate-400">
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 inline-block" />
+            Booked
+          </span>
         </div>
-      </div>
-      {/* Day headers */}
-      <div className="grid grid-cols-7 gap-0.5 mb-1">
-        {DAYS.map((d) => (
-          <div key={d} className="text-center text-[9px] font-semibold text-slate-400 py-0.5">{d}</div>
-        ))}
-      </div>
-      {/* Date grid */}
-      <div className="grid grid-cols-7 gap-0.5">
-        {MARCH_DATES.map((date, i) => (
-          <div
-            key={i}
-            className={cn(
-              "flex h-6 w-6 items-center justify-center rounded-md text-[10px] font-medium mx-auto",
-              date === null && "invisible",
-              date !== null && !BOOKED.has(date) && "text-slate-600 hover:bg-slate-100",
-              date !== null && BOOKED.has(date) && "bg-emerald-100 text-emerald-700 font-bold",
-              date === 21 && "ring-2 ring-blue-400 bg-blue-50 text-blue-700",
-            )}
-          >
-            {date}
-          </div>
-        ))}
+        {/* Day headers */}
+        <div className="grid grid-cols-7 gap-1 mb-1.5">
+          {DAYS.map((d) => (
+            <div key={d} className="text-center text-[10px] font-semibold text-slate-400 py-0.5">{d}</div>
+          ))}
+        </div>
+        {/* Date grid */}
+        <div className="grid grid-cols-7 gap-1">
+          {MARCH_DATES.map((date, i) => (
+            <div
+              key={i}
+              className={cn(
+                "flex h-8 w-8 items-center justify-center rounded-lg text-xs font-medium mx-auto",
+                date === null && "invisible",
+                date !== null && !BOOKED.has(date) && "text-slate-600 hover:bg-slate-100 cursor-pointer",
+                date !== null && BOOKED.has(date) && "bg-emerald-100 text-emerald-700 font-bold",
+                date === 21 && "ring-2 ring-blue-400 bg-blue-50 text-blue-700",
+              )}
+            >
+              {date}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
