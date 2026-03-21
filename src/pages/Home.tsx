@@ -4,27 +4,13 @@ import { Button } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/ui/Card";
 import { BookingSection } from "@/components/BookingSection";
 import { FounderImage } from "@/components/FounderImage";
-import { services } from "@/data/services";
 import { motion } from "motion/react";
 import { PhoneCall, MessageSquare, LayoutTemplate, Workflow, ArrowRight, CheckCircle2, Hammer, Flame, Wrench } from "lucide-react";
+import { BentoServicesGrid } from "@/components/BentoServicesGrid";
 import { TradeToggle } from "@/components/ui/TradeToggle";
 import { ComparisonTable } from "@/components/ui/ComparisonTable";
 import { trackCTAClick, trackServiceInterest, useTrackSectionView } from "@/lib/analytics";
 import { HeroSection } from "@/components/ui/HeroSection";
-
-const iconMap = {
-  PhoneCall,
-  MessageSquare,
-  LayoutTemplate,
-  Workflow,
-};
-
-const serviceMetricHighlights: Record<string, { stat: string; label: string }> = {
-  "voice-agents":    { stat: "15–20",  label: "extra bookings per month" },
-  "chat-agents":     { stat: "30%",    label: "more leads captured" },
-  "landing-pages":   { stat: "2x",     label: "conversion improvement" },
-  "custom-automation": { stat: "10+",  label: "hours saved per week" },
-};
 
 
 export default function Home() {
@@ -214,77 +200,13 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
             label="What We Build"
-            title="AI Solutions That Pay for Themselves"
-            subtitle="Four done-for-you systems that directly increase revenue and cut costs for contractors."
+            title="Five Systems. Built for Contractors."
+            subtitle="Done-for-you AI infrastructure that captures leads, books jobs, and runs your shop — while you're on the roof."
             centered
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-12">
-            {services.map((service, index) => {
-              const Icon = iconMap[service.icon as keyof typeof iconMap];
-              const m = serviceMetricHighlights[service.id];
-
-              // Bento layout: Voice (0) tall left col-span-1, Chat (1) top mid, Landing (2) top right, Custom (3) bottom spanning 2 cols
-              const isTallCard = index === 0;
-              const isBottomWideCard = index === 3;
-
-              return (
-                <motion.div
-                  key={service.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  transition={{ duration: 0.5, delay: index * 0.08 }}
-                  className={`rounded-2xl border p-6 md:p-8 flex flex-col transition-all duration-200 ${
-                    index === 0 || index === 3 ? "bg-blue-50 border-blue-100" : "bg-white border-slate-200"
-                  } ${isTallCard ? "md:row-span-2" : ""} ${isBottomWideCard ? "md:col-span-2" : ""}`}
-                >
-                  {/* Tall left card (Voice): big stat first */}
-                  {isTallCard && m && (
-                    <div className="mb-6">
-                      <div className="text-6xl md:text-7xl font-extrabold text-blue-600 leading-none mb-2">
-                        {m.stat}
-                      </div>
-                      <div className="text-xs font-semibold uppercase tracking-widest text-slate-400">
-                        {m.label}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Icon + title */}
-                  <div className="flex items-start gap-3 mb-4">
-                    <div className={`h-10 w-10 rounded-lg flex items-center justify-center shrink-0 ${index === 0 || index === 3 ? "bg-blue-600" : "bg-blue-50"}`}>
-                      <Icon className={`h-5 w-5 ${index === 0 || index === 3 ? "text-white" : "text-blue-600"}`} strokeWidth={1.5} />
-                    </div>
-                    <h3 className="text-lg md:text-xl font-bold text-slate-900">
-                      {service.title}
-                    </h3>
-                  </div>
-
-                  {/* Description */}
-                  <p className="text-sm leading-relaxed mb-4 flex-grow text-slate-500">
-                    {service.shortDescription}
-                  </p>
-
-                  {/* Middle cards (Chat, Landing): stat in the middle or bottom, wide bottom card (Custom) */}
-                  {!isTallCard && m && (
-                    <div className="mb-4 pt-4 border-t border-slate-200">
-                      <div className="text-5xl font-extrabold text-emerald-600 leading-none mb-1">{m.stat}</div>
-                      <div className="text-xs text-slate-400 uppercase tracking-widest">{m.label}</div>
-                    </div>
-                  )}
-
-                  {/* CTA */}
-                  <Link
-                    to={`/services/${service.slug}`}
-                    className="inline-flex items-center text-sm font-semibold mt-4 text-blue-600 hover:text-blue-700"
-                    onClick={() => trackServiceInterest(service.title)}
-                  >
-                    Learn more <ArrowRight className="ml-1.5 h-4 w-4" />
-                  </Link>
-                </motion.div>
-              );
-            })}
+          <div className="mt-12">
+            <BentoServicesGrid />
           </div>
         </div>
       </section>
