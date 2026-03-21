@@ -2,7 +2,7 @@ import { Card } from "@/components/ui/Card";
 import { BookingSection } from "@/components/BookingSection";
 import { FounderImage } from "@/components/FounderImage";
 import { motion } from "motion/react";
-import { Target, Shield, Zap, Users } from "lucide-react";
+import { Target, Shield, Zap, Users, Hammer } from "lucide-react";
 
 const journey = [
   {
@@ -39,7 +39,7 @@ const journey = [
     era: "2026",
     badge: "AI Agency",
     title: "Elevate Digital",
-    tagline: "Bringing the enterprise playbook to SMBs at a fraction of the cost.",
+    tagline: "Went all-in on contractors. The data said yes.",
     stat: { value: "30 days", label: "avg. time to first measurable ROI" },
     accentColor: "text-blue-600",
     dotBorder: "border-blue-400",
@@ -60,7 +60,7 @@ export default function About() {
             transition={{ duration: 0.7, ease: "easeOut" }}
           >
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif text-text-heading mb-8 leading-[1.1] tracking-tight text-balance max-w-4xl mx-auto">
-              <span className="italic text-accent">Time Wealth</span> for SMBs.
+              We Chose Contractors. <span className="italic text-accent">Here's Why.</span>
             </h1>
             <p className="text-xl text-text-body max-w-3xl mx-auto leading-relaxed">
               We believe small business owners shouldn't have to choose between growing their company and having a life. We build the AI systems that make both possible.
@@ -160,18 +160,18 @@ export default function About() {
             <h2 className="text-2xl font-bold text-slate-900 mb-8">About Elevate Digital</h2>
             <div className="space-y-5 text-lg text-text-body leading-relaxed max-w-3xl">
               <p>
-                I started Elevate Digital because I saw a massive gap: enterprise companies were leveraging AI to become hyper-efficient, while the small businesses that power local communities were still drowning in missed calls, manual data entry, and 80-hour weeks.
+                I started Elevate Digital because I saw a massive gap: enterprise companies were leveraging AI to become hyper-efficient, while the contractors who build our neighborhoods were still drowning in missed calls, manual data entry, and 80-hour weeks.
               </p>
               <p>
-                I knew there had to be a better way. Today, Elevate Digital acts as your fractional Chief AI Officer. We don't just sell software — we architect custom automation engines that run silently in the background, capturing leads, booking appointments, and saving you thousands of hours.
+                The data was clear: 27% of contractor calls go to voicemail, costing the average shop $50K/year in lost revenue. Zero tech adoption. Outsized ROI opportunity. So we went all-in on construction.
               </p>
               <p>
-                Every solution we build is designed with one goal: giving you back the time and freedom you started your business for in the first place.
+                Today, Elevate Digital acts as your fractional Chief AI Officer. We don't just sell software — we architect custom automation engines that run silently in the background, capturing leads, booking appointments, and saving you thousands of hours.
               </p>
             </div>
             <blockquote className="mt-10 border-l-2 border-blue-500 pl-6 max-w-3xl">
               <p className="text-lg italic text-slate-700 leading-relaxed">
-                "Every system I built for enterprise — the lead scoring, the automation workflows, the conversion funnels — I've rebuilt for SMBs at a fraction of the cost. You shouldn't need a $10M engineering budget to have tools that work this well."
+                "Every system I built for enterprise — the lead scoring, the automation workflows — I rebuilt for contractors. Because no one should lose a $13K job to voicemail."
               </p>
               <footer className="mt-3 text-sm font-semibold text-slate-500 uppercase tracking-wide">
                 — Tal Shani, Founder
@@ -185,6 +185,7 @@ export default function About() {
                 { icon: Shield, title: "Radical Transparency", desc: "No hidden fees, no jargon, no surprises." },
                 { icon: Zap, title: "Speed to Value", desc: "Live in weeks, not months. Fast results matter." },
                 { icon: Users, title: "True Partners", desc: "We succeed when you scale. Your growth is our growth." },
+                { icon: Hammer, title: "Why Construction?", desc: "A $50K/yr missed-call problem meets zero tech adoption. Outsized ROI." },
               ].map((val, i) => {
                 const Icon = val.icon;
                 return (
