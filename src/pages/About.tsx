@@ -63,7 +63,7 @@ export default function About() {
               We Chose Contractors. <span className="italic text-accent">Here's Why.</span>
             </h1>
             <p className="text-xl text-text-body max-w-3xl mx-auto leading-relaxed">
-              We believe small business owners shouldn't have to choose between growing their company and having a life. We build the AI systems that make both possible.
+              We believe contractors shouldn't have to choose between growing their company and having a life. We build the AI systems that make both possible.
             </p>
           </motion.div>
         </div>

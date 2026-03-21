@@ -215,7 +215,7 @@ export default function Home() {
           <SectionHeading
             label="What We Build"
             title="AI Solutions That Pay for Themselves"
-            subtitle="Four done-for-you systems that directly increase revenue and cut costs for US small businesses."
+            subtitle="Four done-for-you systems that directly increase revenue and cut costs for contractors."
             centered
           />
 
