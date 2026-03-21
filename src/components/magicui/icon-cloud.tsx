@@ -25,8 +25,8 @@ export function IconCloud({ images }: IconCloudProps) {
   return (
     <div className="relative flex size-full items-center justify-center overflow-hidden">
       <Cloud {...cloudProps}>
-        {images.map((img, i) => (
-          <a key={i} href="#" onClick={(e) => e.preventDefault()}>
+        {images.map((img) => (
+          <a key={img} href="#" onClick={(e) => e.preventDefault()}>
             <img height="40" width="40" alt="" src={img} />
           </a>
         ))}
