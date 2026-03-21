@@ -1,10 +1,9 @@
-import { useRef } from "react";
 import { Globe, PhoneCall, MessageSquare, Workflow, LayoutTemplate } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { BentoCard, BentoGrid } from "@/components/magicui/bento-grid";
 import { Marquee } from "@/components/magicui/marquee";
 import { AnimatedList, type AnimatedListItem } from "@/components/magicui/animated-list";
-import { AnimatedBeam } from "@/components/magicui/animated-beam";
+import { IconCloud } from "@/components/magicui/icon-cloud";
 
 // ─── SEO & GEO Background ────────────────────────────────────────────────────
 
@@ -92,65 +91,43 @@ function ChatBackground() {
   );
 }
 
-// ─── Automation Background (AnimatedBeam) ────────────────────────────────────
+// ─── Automation Background (IconCloud) ───────────────────────────────────────
 
-function NodeIcon({ label, emoji, className }: { label: string; emoji: string; className?: string }) {
-  return (
-    <div
-      className={cn(
-        "z-10 flex flex-col items-center justify-center gap-1 rounded-xl border border-slate-200 bg-white p-2 shadow-sm w-16",
-        className,
-      )}
-    >
-      <span className="text-lg">{emoji}</span>
-      <span className="text-[9px] font-semibold text-slate-500 uppercase tracking-wide text-center leading-tight">{label}</span>
-    </div>
-  );
-}
+const automationSlugs = [
+  "gmail",
+  "hubspot",
+  "salesforce",
+  "zapier",
+  "n8n",
+  "slack",
+  "notion",
+  "airtable",
+  "googlesheets",
+  "stripe",
+  "twilio",
+  "mailchimp",
+  "zoom",
+  "dropbox",
+  "shopify",
+  "zendesk",
+  "whatsapp",
+  "googledrive",
+  "googlecalendar",
+  "trello",
+  "asana",
+  "pipedrive",
+  "intercom",
+  "clickup",
+];
+
+const automationImages = automationSlugs.map(
+  (slug) => `https://cdn.simpleicons.org/${slug}/${slug}`
+);
 
 function AutomationBackground() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const centerRef = useRef<HTMLDivElement>(null);
-  const hubspotRef = useRef<HTMLDivElement>(null);
-  const twilioRef = useRef<HTMLDivElement>(null);
-  const gmailRef = useRef<HTMLDivElement>(null);
-  const salesforceRef = useRef<HTMLDivElement>(null);
-  const whatsappRef = useRef<HTMLDivElement>(null);
-
   return (
-    <div
-      ref={containerRef}
-      className="absolute inset-0 flex flex-row items-center justify-between px-8 [mask-image:linear-gradient(to_top,transparent_10%,#000_100%)]"
-    >
-      {/* Left: input nodes */}
-      <div className="flex flex-col gap-4">
-        <div ref={hubspotRef}><NodeIcon label="HubSpot" emoji="🟠" /></div>
-        <div ref={twilioRef}><NodeIcon label="Twilio" emoji="🔴" /></div>
-        <div ref={gmailRef}><NodeIcon label="Gmail" emoji="📧" /></div>
-      </div>
-
-      {/* Center: AI node */}
-      <div
-        ref={centerRef}
-        className="z-10 flex h-16 w-16 flex-col items-center justify-center rounded-2xl border-2 border-blue-200 bg-blue-50 shadow-md"
-      >
-        <span className="text-2xl">🤖</span>
-        <span className="text-[9px] font-bold text-blue-600 uppercase tracking-wide mt-0.5">AI</span>
-      </div>
-
-      {/* Right: output nodes */}
-      <div className="flex flex-col gap-4">
-        <div ref={salesforceRef}><NodeIcon label="Salesforce" emoji="☁️" /></div>
-        <div ref={whatsappRef}><NodeIcon label="WhatsApp" emoji="💬" /></div>
-      </div>
-
-      {/* Beams: inputs → center */}
-      <AnimatedBeam containerRef={containerRef} fromRef={hubspotRef} toRef={centerRef} duration={3} delay={0} />
-      <AnimatedBeam containerRef={containerRef} fromRef={twilioRef} toRef={centerRef} duration={3} delay={0.5} />
-      <AnimatedBeam containerRef={containerRef} fromRef={gmailRef} toRef={centerRef} duration={3} delay={1} />
-      {/* Beams: center → outputs */}
-      <AnimatedBeam containerRef={containerRef} fromRef={centerRef} toRef={salesforceRef} duration={3} delay={1.5} reverse />
-      <AnimatedBeam containerRef={containerRef} fromRef={centerRef} toRef={whatsappRef} duration={3} delay={2} reverse />
+    <div className="absolute inset-0 [mask-image:linear-gradient(to_top,transparent_10%,#000_80%)]">
+      <IconCloud images={automationImages} />
     </div>
   );
 }
