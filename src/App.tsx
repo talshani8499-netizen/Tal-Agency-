@@ -15,6 +15,7 @@ import { EbookLanding, AuditLanding, VoiceDemoLanding } from "./pages/LeadMagnet
 import ChatAgents from "./pages/ChatAgents";
 import LandingPages from "./pages/LandingPages";
 import CustomAutomation from "./pages/CustomAutomation";
+import DesignTest from "./pages/DesignTest";
 
 function NotFound() {
   return (
@@ -48,6 +49,7 @@ export default function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
+          <Route path="/design-test" element={<DesignTest />} />
           <Route path="*" element={<NotFound />} />
         </Route>
 
