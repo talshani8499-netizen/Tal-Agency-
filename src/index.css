@@ -204,3 +204,19 @@ h1, h2, h3, h4, h5, h6 {
     scroll-behavior: auto !important;
   }
 }
+
+/* ── Marquee animations (Magic UI) ─────────────────────── */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(-100% - var(--gap, 1rem))); }
+}
+@keyframes marquee-vertical {
+  from { transform: translateY(0); }
+  to   { transform: translateY(calc(-100% - var(--gap, 1rem))); }
+}
+@utility animate-marquee {
+  animation: marquee var(--duration, 40s) linear infinite;
+}
+@utility animate-marquee-vertical {
+  animation: marquee-vertical var(--duration, 40s) linear infinite;
+}
